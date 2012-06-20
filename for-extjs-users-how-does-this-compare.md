@@ -4,7 +4,7 @@ The View Model pattern is really just a logical evolution of existing patterns y
 
 You may be familiar with the "standard" "inline component" pattern in simple ExtJS examples. Let's start with the "hello world" example using that approach:
 
-####Inline component approach (NOT GLUJS!)
+**Inline component approach (NOT GLUJS!)**
 
 ```javascript
 //old-school Ext JS straight-ahead style
@@ -34,7 +34,7 @@ Just as importantly, there's no clean way to test the custom behavior you've add
 
 The next logical improvement then is to separate the view (the actual control definition) from the controller (the logical behavior). That at least will lay down some logical file organization and make behavioral code easier to centralize and manage. This approach is exemplified by the MVC pattern offered in Ext JS 4.x.
 
-####MVC approach (NOT GLUJS!)
+**MVC approach (NOT GLUJS!)**
 
 ```javascript
 //CONTROLLER FILE

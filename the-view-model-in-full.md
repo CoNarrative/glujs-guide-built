@@ -133,7 +133,7 @@ The view model is composed of several distinct parts that represent your applica
        special type of reactor where the action is setting a single property; if it's more complicated, use a reactor.
 
 
-### Example
+**Example**
 
 ```javascript
 glu.model({
@@ -379,7 +379,8 @@ Let's say you have an application with a complex grid that needs to be refreshed
 
 A common way to do this would be to separate out the 'refresh' into a function and then have each of the setters for these trigger the refresh:
 
-#####Example (NOT RECOMMENDED)
+**Example (NOT RECOMMENDED)**
+
 ```javascript
     propertyA: '',
     propertyB: '',
@@ -408,7 +409,8 @@ A common way to do this would be to separate out the 'refresh' into a function a
 
 In other words, you add the behavior on the triggering end of things. But if there are multiple triggers, this creates redundancies. With gluJS, you could simply state the following instead:
 
-#####Example (RECOMMENDED)
+**Example (RECOMMENDED)**
+
 ```javascript
     propertyA: '',
     propertyB: '',

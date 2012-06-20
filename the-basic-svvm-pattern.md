@@ -171,7 +171,7 @@ To sump up, what the binding pattern provides is an extremely simple way to deal
 
 In addition to the simplicity of binding, gluJS also provides a very straightforward way to "compose" your views dynamically that include "config transformations", localization, one-to-many tab patterns, dynamic areas of the screen, pop-up messages and dialogs, layouts, and more. Furthermore, there is a strong "name convention" piece to gluJS we have not yet introduced that makes your bindings even simpler and more consistent. These will be covered in a later more detailed section.
 
-####Example flow between viewmodel and view
+**Example flow between viewmodel and view **
 
 The binding built within gluJS is very simple to use, but lets you quickly compose sophisticated interaction patterns. In the running 'Hello World' example, the flow between view and view model can be summarized as follows:
  1. The button starts out toggled because `arriving` starts out `true`, and the `title` of the panel starts out as 'Hello World!' because `message` (which is calculated from the value of `arriving`) is that value.
