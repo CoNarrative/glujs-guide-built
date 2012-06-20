@@ -23,6 +23,7 @@
         * [The specification in code](the-basic-svvm-pattern.md#the-specification-in-code)
     * [The view model](the-basic-svvm-pattern.md#the-view-model)
     * [The view and binding](the-basic-svvm-pattern.md#the-view-and-binding)
+    * [Example flow between viewmodel and view](the-basic-svvm-pattern.md#example-flow-between-viewmodel-and-view)
     * [Basic entry points](the-basic-svvm-pattern.md#basic-entry-points)
 * [For ExtJS users: How does this compare?](for-extjs-users-how-does-this-compare.md#for-extjs-users-how-does-this-compare)
     * [The GluJS way](for-extjs-users-how-does-this-compare.md#the-glujs-way)
