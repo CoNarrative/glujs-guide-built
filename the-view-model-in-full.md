@@ -110,7 +110,7 @@ var vm = glu.model('example.main');
 
 Javascript has a different notion of `this` than more traditional Object-Oriented languages. Since functions are first-class and can be passed around and called from another function and are not tied intrinsically to an object instance, the meaning of `this` is determined by the calling context and so can be ambiguous. This often leads to many subtle and not-so-subtle bugs.
 
-One way around this is to set a `me` variable to the appropriate scope and use it instead so that it is enclosed within the function. That means the value of `me` will be fixed. That is certainly an option within gluJS. However, you are still having to explicitly on a context by context basis what the value of `me` is.
+One way around this is to set a `me` variable to the appropriate scope and use it instead so that it is enclosed within the function. That means the value of `me` will be fixed. That is certainly an option within gluJS. However, this still means you need to track on a context-by-context basis what the value of `me` is.
 
 GluJS cuts through this ambiguity by *always* making the scope of `this` the containing view model. If you use gluJS as intended, you will never have to provide a `scope` value on any callback and `this` will always have a clear, unambiguous meaning.
 
@@ -119,16 +119,16 @@ GluJS cuts through this ambiguity by *always* making the scope of `this` the con
 
 The view model is composed of several distinct parts that represent your application state and behavior:
 
-  *    Properties: Hold states that various parts of the screen can be in. Usually correspond to things that the user can set
+  *    *Properties* - Hold states that various parts of the screen can be in. Usually correspond to things that the user can set
        (like the contents of a text field, or the currently active tab, or which rows of a grid are selected).
-  *    Formulas: Calculated properties that respond to changes in properties or other formulas. By their nature, they are
+  *    *Formulas* - Calculated properties that respond to changes in properties or other formulas. By their nature, they are
        read-only so they typically represent the app 'responding' to user interaction. Glu will analyze the formula and keep it
        updated when input properties change.
-  *    Submodels: Contains various subscreens and lists of subscreens (glu is for full applications so view models are always
+  *    *Submodels* - Contains various subscreens and lists of subscreens (glu is for full applications so view models are always
        in a hierarchy with a single root). There is also a special 'parentVM' property to find any view model's container.
-  *    Commands: Actions that the user can take that aren't represented by simple properties. For instance, a save button or
+  *    *Commands* - Actions that the user can take that aren't represented by simple properties. For instance, a save button or
        hitting the 'close window' indicator.
-  *    Reactors: Rules that are triggered on property / formula changes so you don't have to put all of your side-effects
+  *    *Reactors* - Rules that are triggered on property / formula changes so you don't have to put all of your side-effects
        into the property setter. For instance, refreshing the grid when any of several filters change. A formula is really a
        special type of reactor where the action is setting a single property; if it's more complicated, use a reactor.
 
@@ -364,9 +364,9 @@ Whenever possible, see if what you're trying to do can be reduced to a property 
 #### Guard functions
 
 Glu has some strong naming conventions around commands (as well as other properties). These are called *guard functions*. They are simply formulas that *guard* other properties or commands from being accessed and other than the naming convention, are nothing special. The list includes the following (assuming *foo* is the name of a property or command):
- * fooIsEnabled  - whether it is enabled/disabled
- * fooIsVisible  - whether it is visible/invisible
- * fooIsExpanded - whether it is expanded/collapsed
+ * `fooIsEnabled`  - whether it is enabled/disabled
+ * `fooIsVisible`  - whether it is visible/invisible
+ * `fooIsExpanded` - whether it is expanded/collapsed
 
 Following the naming pattern not only keeps your code consistent across time and developers, but also enables convention-based binding, a feature that reduces code clutter even further (see later section).
 
