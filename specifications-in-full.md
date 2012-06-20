@@ -216,7 +216,7 @@ Jasmine already has excellent support for manually controlling the clock to hand
 
 ####Ajax responses
 
-GluJS lets you simulate Ajax responses using the gluJS [AJAX simulator](undefined.md#Ajax simulator). You define the routes during setup and turn on the framework for *capture*. As the calls are made, instead of being delivered to the browser for an actual AJAX call, they are stored up in each captured route by name.
+GluJS lets you simulate Ajax responses using the gluJS [AJAX simulator](simulation-framework.md#ajax-simulator). You define the routes during setup and turn on the framework for *capture*. As the calls are made, instead of being delivered to the browser for an actual AJAX call, they are stored up in each captured route by name.
 
 You will typically have a different route for each type of service call and name them accordingly. That way you can manage the responses separately and logically.
 
