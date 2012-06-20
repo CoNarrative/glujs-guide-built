@@ -179,7 +179,7 @@ The binding built within gluJS is very simple to use, but lets you quickly compo
  4. That in turn triggers the view model formula called `message` to recalculate based on the provided formula funciton. It now has the value 'Goodbye World!'
  5. Since the `title` is bound to `message`, gluJS automatically updates the title to match
 
-It's a simple but very powerful pattern. If you are familiar with ExtJS (and even if you are not) it will be useful to walk through the 'For ExtJS Users' section below to see how it compares against "straight-ahead" and "MVC" aproaches on even a simple reactive application.
+It's a simple but very powerful pattern. If you are familiar with ExtJS (and even if you are not) it will be useful to walk through the [For ExtJS users: How does this compare?](for-extjs-users-how-does-this-compare.md#for-extjs-users-how-does-this-compare) section below to see how it compares against "straight-ahead" and "MVC" aproaches on even a simple reactive application.
 
 ###Basic entry points
 

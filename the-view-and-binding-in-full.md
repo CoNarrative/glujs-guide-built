@@ -246,7 +246,7 @@ Now for the binding directives (these all come immediately after the `@` sign an
 
  * `>` One-way binding - update the view when the control changes, but not vice versa, making the control binding "read-only". Example: `value:'@>{displayText}'` will initially set the value to `displayText` and will track changes to that in the view model, but will never itself update the view model.
 
- * `?` Optional binding - do not raise an error if the matching view model property is not found. This is usally only used when working with view adapters (see later section) as ordinarily you want to know when you have a "bad binding'. Example: `value:'@?{displayText}'` will let the application continue smoothely even if there is no `displayText` on the view model. 
+ * `?` Optional binding - do not raise an error if the matching view model property is not found. This is usally only used when working with view adapters (extending gluJS) as ordinarily you want to know when you have a "bad binding'. Example: `value:'@?{displayText}'` will let the application continue smoothely even if there is no `displayText` on the view model.
 
 ###Binding properties
 
@@ -404,7 +404,7 @@ But if you want to use actual ExtJS controls for each row, there is no such supp
 `~~~title~~~`
 
 
-###Name-based binding
+###Binding by convention
 
 We've up until now covered "explicit" binding of control config properties. This already is a powerful pattern for organizing UI and greatly simplifying code. Yet as you use it, you will inevitably notice that binding patterns tend to repeat themselves.
 

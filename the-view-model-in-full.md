@@ -368,7 +368,8 @@ Glu has some strong naming conventions around commands (as well as other propert
  * `fooIsVisible`  - whether it is visible/invisible
  * `fooIsExpanded` - whether it is expanded/collapsed
 
-Following the naming pattern not only keeps your code consistent across time and developers, but also enables convention-based binding, a feature that reduces code clutter even further (see later section).
+Following the naming pattern not only keeps your code consistent across time and developers, but also enables convention-based binding, a feature that reduces code clutter even further (see
+the section on [Binding by convention](the-view-and-binding-in-full.md#binding-by-convention)).
 
 ### Reactors
 

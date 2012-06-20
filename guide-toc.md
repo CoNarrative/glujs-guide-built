@@ -76,7 +76,7 @@
     * [Container binding](the-view-and-binding-in-full.md#container-binding)
         * [Item Templates](the-view-and-binding-in-full.md#item-templates)
     * [Localization](the-view-and-binding-in-full.md#localization)
-    * [Name-based binding](the-view-and-binding-in-full.md#name-based-binding)
+    * [Binding by convention](the-view-and-binding-in-full.md#binding-by-convention)
 * [Recipes (Composition Patterns)](recipes-composition-patterns.md#recipes-composition-patterns)
 * [Extending gluJS](extending-glujs.md#extending-glujs)
     * [view adapters](extending-glujs.md#view-adapters)
