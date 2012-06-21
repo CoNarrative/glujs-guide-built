@@ -61,7 +61,7 @@ glu.model({
 });
 ```
 
-#### A note on `this` and scope
+**A note on `this` and scope**
 
 Javascript has a different notion of `this` than more traditional Object-Oriented languages. Since functions are first-class and can be passed around and called from another function and are not tied intrinsically to an object instance, the meaning of `this` is determined by the calling context and so can be ambiguous. This often leads to many subtle and not-so-subtle bugs.
 

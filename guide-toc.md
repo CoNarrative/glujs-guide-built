@@ -28,8 +28,6 @@
 * [For ExtJS users: How does this compare?](for-extjs-users-how-does-this-compare.md#for-extjs-users-how-does-this-compare)
     * [The GluJS way](for-extjs-users-how-does-this-compare.md#the-glujs-way)
 * [View model: Parts](view-model-parts.md#view-model-parts)
-
-    * [A note on `this` and scope](view-model-parts.md#a-note-on-this-and-scope)
     * [Properties](view-model-parts.md#properties)
         * [Serialization (data)](view-model-parts.md#serialization-data)
     * [Formulas](view-model-parts.md#formulas)
