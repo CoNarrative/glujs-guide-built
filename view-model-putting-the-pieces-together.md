@@ -157,8 +157,11 @@ If a `tabpanel`'s `items` collection is bound to the screenList, it will automat
 ### The view model graph
 
 When you create child view models, those are automatically parented as follows:
+
  * `this.parentVM` - the child is given a reference to the parent view model. If the child is part of a `list`, the parentVM is the parent of the list, not the list itself. Note that this can change if the view model is 're-parented'.
+
  * `this.parentList` - the parent list of a child in the list. This too can change based on what list the child is added to.
+
  * `this.root` - the root view model. The root of the entire view model tree. This is immutable and is simply the "initial entry point". In other words, it constitutes the "application" as far as glu is concerned. That does not preclude you from having multiple application roots within a single page (such as different modules in a larger non-glu application).
 
 Reactors and formulas are automatically attached/detached based on the current configuration of the tree. For instance, if you create a view model with a formula that references `this.parentVM`, when detached (e.g. removed from a list), that view model will stop receiving notifications until reattached at the same point or elsewhere.

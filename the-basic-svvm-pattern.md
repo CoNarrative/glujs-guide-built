@@ -4,8 +4,11 @@ GluJS is a refined variant of the MVVM (Model-View-View Model) pattern that we c
 The switch to SVVM underscores two points. First it underscores one of the main points of GluJS: making it dead simple to drop right into test-first development based on user stories or specifications. In fact, we recommend (and make it simple) to always start with a specification.
 
 The second is that the architecture is simpler than it looks. Essentially, there are
+
  * specs -        descriptions of what the app is supposed to do that are also fully functional tests
+
  * view models -  descriptions of screen states and rules that include data
+
  * views -        declarative JSON that describes the component tree (similar to MXML or XAML from Flex and WPF/Silverlight)
 
 That's really it. By simplifying the architecture, we make it a very direct path to true test-first development.
@@ -15,8 +18,11 @@ That's really it. By simplifying the architecture, we make it a very direct path
 Let's start with an example. Imagine a "Hello World" application. Except since we're building reactive applications, imagine it has some minimum behavior as follows:
 
  * There's a "message" label that contains either "Hello World!" or "Goodbye World!"
+
  * It starts out with "Hello World"
+
  * There's a toggle button that tracks whether you are coming or going.
+
  * When you click it, it flips over to "Goodbye World!"
 
 To formalize this a little, we'll put this in the shape of a user story. We are going to use the "Given, When, Should Have" format. In other words, almost any user story can be reduced to a few basic parts:
@@ -89,10 +95,15 @@ Either way works. Don't worry about what's going on in the details - we'll retur
 You've seen an overview of a specification. What exactly does the developer code to make this come to life? The first thing the developer needs to do is model the application behavior.
 
 A view model is a "state machine" that tracks anything "interesting" going on in your application. What we mean by interesting is simply any screen behavior that includes one of the following:
+
  * app-specific logic that is not encapsulated in a control and you'd have to write some sort of handler for (especially when one control influences another). In short, if you would ordinarily go about it by adding a handler to a control or calling a method on a control, you should put that in the view model.
+
  * the state of any forms / data made visible in a screen
+
  * validations (really another form of app-specific logic)
+
  * calculations (the same again)
+
  * Ajax calls to a "back-end"
 
 It does *not* include "uninteresting" things that are part of standard out-of-the-box control behavior. For instance, whether a combo-box is expanded or not is usually based entirely on existing standard conventions and handled internally by the control.
@@ -146,8 +157,10 @@ To make the view "come alive", we need to connect it with the view model. This i
 To understand the purpose of the binding syntax, it is important to take a small step back. ExtJS (among others) provide a rich declarative JSON configuration block for each control. Values provided in the configuration block will only be used on initial render. You must also normally add listeners and invoke setters to add application-specific behavior. In short, there are normally three things you do with any view control:
 
  * To configure for first-time rendering, provide an initial configuration property in the view itself.
+
  * To listen for changes from user input, find a reference to the view object and add event handlers.
    * For the button example above, we would normally listen on the 'toggle' event.
+
  * To change the view object in response to application behavior, find a reference to the view component and call appropriate methods
    * To change the pressed state of the button, we would call the `toggle` method, and to change the state of the title we would call `setTitle`.
 
@@ -160,10 +173,13 @@ controlConfig : '@{viewmodelProperty}'
 ```
 
 That will tell the GluJS to do three things at once:
+
  * configure the initial control property with the value from the view model property.
    * So for `pressed:'@{arriving}'` it will set it initially to `true` (the initial value in the view model)
+
  * add a matching event handler to the control that will change the view model property (or invoke a command) based on user input.
    * In this case, it will add an event handler for the `toggle` event that will automatically set the `arriving` property to match.
+
  * add a listener to the view model so when its property changes, the view follows suit.
    * If you call `.set('arriving', true)` on the view model, the button will toggle to match.
 

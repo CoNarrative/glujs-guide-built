@@ -7,7 +7,9 @@ In this section, we go deeper into the setup and use of the GluJS simulation fra
 Use of the Ajax simulator involves a few simple steps:
 
  * Set up a backend with routes
+
  * Turn on capturing of Ajax calls
+
  * Returning response objects as needed
 
 ####Routes
@@ -136,10 +138,15 @@ That will set up a database table based on the `fields` definition in the asset 
 The returned table object supports the usual set of CRUD operations:
 
  * `create` - create a new row
+
  * `list` - return a paged, sorted, filtered list
+
  * `get` - return a single item by key
+
  * `update` - update the fields of a single item
+
  * `replace` - complete replace the row of a single item (equivalent to a remove and a create with the same key)
+
  * `remove` - remove an item from the list based on the provided key
 
 All of these accept standard params (such as `start`, `limit`, etc.) and return a "standard response" (list returns a paged response for instance), so if you want to simply let them handle the received parameters and return a standard result for your REST calls, you can do that:

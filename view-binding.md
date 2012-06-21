@@ -7,7 +7,9 @@ Of course, views need to be *bound* to a view model in order to have any behavio
 The binding syntax supports a number of straightforward operators. Keep in mind we want the binding to be concise so that the behavior can be kept in the view model where it belongs. To that end the operators are very simple and concentrate only on *what to bind* (how to locate and process the property) and *how to bind* (also known as "binding directives"). Let's start with the first kind:
 
  * `!` Inverts a boolean value. Example: `collapsed:'{@!expanded}'`
+
  * `.` Allows you to naturally traverse into child objects. Example: `text:'{@activeItem.displayText}'`
+
  * `..`: Find the property at this level or any level above. Example: `save:'{@..save}'` will bind to the save command/function at this view model level and if it cannot find it, walk up the `parentVM` chain until it does find it.
 
 Now for the binding directives (these all come immediately after the `@` sign and before the `{` to indicate that they are about *how* and not *what* to bind.
@@ -161,8 +163,11 @@ We are planning on adding more explicit parameterization to the binding syntax i
 Static views are usually not all there is in a reactive application. In fact, a very common pattern is managing and rendering a list of items with:
 
  * a changing list of (possibly mixed in type) models
+
  * a way to display the list visually by binding to the list and rendering each item through a 'template'
+
  * (usually) a single 'active' or 'focused' item
+
  * (sometimes) the ability to select multiple items (for an operation).
 
 ExtJS has some support for this. The most obvious example is the grid, which renders each item (a record or model) in a list (store) - but you have to use grid columns or your own HTML renderers and not ExtJS controls, and it is assumed that all rows are the same. A less-commonly used option is the `DataView`. It is much the same as a grid, but instead of the template being a set of ExtJS components (as one would expect), it is instead a raw HTML `xtemplate` that you supply and again assumes similar rows. Furthermore, since the appeal of a widget set like ExtJS is that you *are not having to write* cross-browser HTML, using the `DataView` can be frustrating and counter-intuitive.

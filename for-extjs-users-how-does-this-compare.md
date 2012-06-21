@@ -99,9 +99,13 @@ This is definitely an organizational improvement. Following a MVC pattern at lea
 In effect, all we've done is externalized how component event handlers and references back to other components are "wired". Now that we have split them apart, we have *even more work* than before in writing "component queries" to bring them back together again. We could call the pattern MVCRCQ - a model, view, controller, references, and component queries, because without `refs` and component queries for each and every bit of "wiring", the MVC pattern won't work.
 
 Because the view and controller still need to be manually "wired up", there has been little real actual separation at an architectural level:
+
  * The app is still "brittle": the references and component queries mean your controllers have to know how to find items in your view tree.
+
  * You still manually find other controls and manipulate them directly.
+
  * There is still no incremental way to build just the critical behavior without building the entire view tree as well.
+
  * And there is still no obvious "entry point" to begin testing.
 
 ###The GluJS way
@@ -109,7 +113,9 @@ Because the view and controller still need to be manually "wired up", there has 
 The best of both worlds would be if the behavior could both be separated into a controller, yet somehow reconnect to the matching view automatically without expensive wiring. All the interesting state could be put into the controller and within the controller we would never have to deal with the view at all. This approach would offer these benefits:
 
  * You can eliminate all of the "hand-wiring" and dramatically shrink/simplify code.
+
  * The controller and view are entirely stand-alone and separate, greatly reducing "brittleness".
+
  * You can build and test all of your custom application logic before you even deal with the control layout.
 
 A controller that does this - models important application state and doesn't reference the view - is simply called a "view model."

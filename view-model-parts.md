@@ -212,8 +212,11 @@ Whenever possible, see if what you're trying to do can be reduced to a property 
 ####Guard functions
 
 Glu has some strong naming conventions around commands (as well as other properties). These are called *guard functions*. They are simply formulas that *guard* other properties or commands from being accessed and other than the naming convention, are nothing special. The list includes the following (assuming *foo* is the name of a property or command):
+
  * `fooIsEnabled`  - whether it is enabled/disabled
+
  * `fooIsVisible`  - whether it is visible/invisible
+
  * `fooIsExpanded` - whether it is expanded/collapsed
 
 Following the naming pattern not only keeps your code consistent across time and developers, but also enables convention-based binding, a feature that reduces code clutter even further (see

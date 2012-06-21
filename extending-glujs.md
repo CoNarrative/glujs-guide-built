@@ -58,9 +58,13 @@ We're not going to go into all of the details - that's covered in the API docs. 
 This is a component adapter for the `Ext.button.Button` component. Here are some of the parts you're seeing here:
 
  * `glu.regAdapter('button',` - we name component
+
  * `extend : 'component'` - inherits from the `component` adapter. You can chain adapters to match the control hierarchy of the widget set. Inheriting from `component` means we'll get the standard naming conventions and bindings.
+
  * `defaultTypes` through `menuShortcut` - tells gluJS about ExtJS definition shortcuts so that it can walk the view tree properly
+
  * `applyConventions` - applies conventions when gluJS detects a `name` property. Notice that the `handler` is a required binding (if you call a button 'save' there better be a 'save' command on the view model) while 'pressed' is an optional binding.
+
  * `pressedBindings` - provides special helpers when binding to the `pressed` component property, such as how to set the component property in response to view model changes (`setComponentProperty`) which event to respond to `toggle` and how to return the event value `eventConverter`.
 
 Whenever we come across a component property (or component) that we have yet 'gluified', we simply go into the appropriate adapter (or create a new one) and add the bindings. In other words, instead of having 'hacks' spread throughout the code to remember that you have to call 'toggle' to change the 'pressed' state of a button, we set it up one time in the adapter and then can ignore an unnecessary 2/3 of the ExtJS control API (along with the other GluJS benefits).

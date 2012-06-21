@@ -89,13 +89,17 @@ Notice that 'Given' and 'When' blocks are simply structure and do *absolutely no
 ###Meaning
 
 `Meaning` is the block that actually advances the simulated state of the application. The goal is to let the view model "do its thing" entirely ignorant of whether it is running in test harness or as a live application. That means it has to deal with everything that could happen within the client. These break down into four basic categories:
+
  *  *Simulation setup* - Before anything can run, the simulation must be placed into a defined test harness.
+
  *  *The user takes an action* - The user of the application at this point clicks, drags, or otherwise interacts with the application, such as:
     * Clicks on a button (to execute a command)
     * Selects a row or item from a grid/list
     * Updates text in a text field or area
     * Changes the focus of a list of things
+
  *  *An asynchronous timed background process executes* - The application might have a periodic refresh, or a one-time delayed action that was triggered by an earlier user command.
+
  *  *An asynchronous Ajax call returns a response* - The application receives a response from the server. This could be a success, a failure, or even a timeout.
 
 GluJS combined with Jasmine provides complete simulation coverage for all four categories of action:
