@@ -1,6 +1,6 @@
 ##Extending GluJS
 
-GluJS is itself built as a series of simple stacked patterns; the 'convention-based binding' covered in a previous [section](the-view-and-binding-in-full.md#binding-by-convention) is a great example since all it does is walk the view configs, look for a 'name' property, and then modify the configuration by adding some standard bindings. You could build the same thing yourself within GluJS fairly easily.
+GluJS is itself built as a series of simple stacked patterns; the 'convention-based binding' covered in a previous [section](view-binding.md#binding-by-convention) is a great example since all it does is walk the view configs, look for a 'name' property, and then modify the configuration by adding some standard bindings. You could build the same thing yourself within GluJS fairly easily.
 
 Those bindings in turn reduce to a standard pattern of 'find the event I can attach to for changes from the component' and 'let me invoke the property method on the component'.
 
