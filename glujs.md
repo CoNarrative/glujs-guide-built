@@ -22,7 +22,7 @@ The bar of user experience has been raised. You can no longer deliver a web appl
 
 If you have any of these sorts of requirements, then you have a reactive application.
 
-###Why GluJS? The short version
+###Why GluJS?
 
 Developing rich, reactive business-oriented web UIs turns out to be much more difficult than it first appears. For most enterprises, the smartest thing to do is to find a library that offers a rich UI component set - like Sencha ExtJS - to handle the complexities of laying out UI across browsers.
 
@@ -34,9 +34,7 @@ GluJS is for anyone who is trying to build a rich web HTML UI using a declarativ
 
 Best of all, it is "test-driven" from the ground up so that all of your UI code -- from user interactions to AJAX calls -- can be simulated in a fast and developer-friendly test harness.
 
-If you want more detail on the challenges GluJS addresses, continue with the "Extended Version"; otherwise skip on to the "SVVM" section.
-
-###Why GluJS? The extended version
+###Challenges when building a reactive application
 
 Developing rich web and mobile HTML-based applications in Javascript can be new territory for many enterprise development teams. While there are great libraries like Sencha ExtJS to make a "desktop-like" experience, even ExtJS experts face significant challenges turning the initial "it looks great!" ExtJS wireframes into an actual large working application:
 

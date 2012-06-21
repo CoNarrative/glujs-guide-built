@@ -71,24 +71,24 @@ Given 'the Hello World application on launch', ->
 
 We use CoffeeScript (for the specifications only) because it makes them so short and expressive that they match up very closely with the plain English specification provided by the analyst. Here's the same thing in javascript if you prefer that:
 ```javascript
-    Given ('the Hello World application on launch', function() {
-        var vm;
-        Meaning (function(){
-            vm = glu.model ('helloworld.main');
-        });
-        ShouldHave ('set the message to "Hello World!"', function() {
-            expect (vm.shoutOut).toBe ('Hello World!);
-            When ('the user toggles their status', function() {
-                Meaning (function(){
-                    vm.set('isLeaving',true);
-                });
-                ShouldHave ('set the message to "Goodbye World!"', function(){
-                    expect (vm.shoutOut).toBe ('Goodbye World!');
-                });
-            });
-
-        });
+Given ('the Hello World application on launch', function() {
+    var vm;
+    Meaning (function(){
+        vm = glu.model ('helloworld.main');
     });
+    ShouldHave ('set the message to "Hello World!"', function() {
+        expect (vm.shoutOut).toBe ('Hello World!);
+        When ('the user toggles their status', function() {
+            Meaning (function(){
+                vm.set('isLeaving',true);
+            });
+            ShouldHave ('set the message to "Goodbye World!"', function(){
+                expect (vm.shoutOut).toBe ('Goodbye World!');
+            });
+        });
+
+    });
+});
 ```
 
 Either way works. Don't worry about what's going on in the details - we'll return to that in a moment. Just note how similar the developer specification is to the plain English specification. The "miscommunication" gap has been reduced to a minimum and the developer can start coding exactly "to spec".

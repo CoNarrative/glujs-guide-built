@@ -2,8 +2,8 @@
 ###Table of Contents
 * [GluJS](glujs.md#glujs)
     * [Reactive applications](glujs.md#reactive-applications)
-    * [Why GluJS? The short version](glujs.md#why-glujs-the-short-version)
-    * [Why GluJS? The extended version](glujs.md#why-glujs-the-extended-version)
+    * [Why GluJS?](glujs.md#why-glujs)
+    * [Challenges when building a reactive application](glujs.md#challenges-when-building-a-reactive-application)
         * [Difficult to test](glujs.md#difficult-to-test)
         * [Adding rich reactive behavior gets complicated fast](glujs.md#adding-rich-reactive-behavior-gets-complicated-fast)
         * [Server development can hold back client development (and vice versa).](glujs.md#server-development-can-hold-back-client-development-and-vice-versa)
