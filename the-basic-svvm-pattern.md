@@ -197,7 +197,7 @@ The binding built within GluJS is very simple to use, but lets you quickly compo
  1. The button starts out toggled (because `arriving` starts out `true`), and the `title` of the panel starts out as 'Hello World!' (because `message` is a formula calculated off of `arriving`).
  3. When the button is clicked, `arriving` changes to `false` (because the `pressed` property of the button is bound to the `arriving` view model property).
  4. That in turn triggers `message` to recalculate automatically to the value 'Goodbye World!'
- 5. The title updates to `Goodbye World!) (since the `title` component property is bound to `message`)
+ 5. The title updates to `Goodbye World!` (since the `title` component property is bound to `message`)
 
 It's a simple but very powerful pattern. If you are familiar with ExtJS (and even if you are not) it will be useful to walk through the [For ExtJS users: How does this compare?](for-extjs-users-how-does-this-compare.md#for-extjs-users-how-does-this-compare) section below to see how it compares against "straight-ahead" and "MVC" approaches on even a simple reactive application.
 
