@@ -8,7 +8,7 @@ In order to run them as tests, we use [Jasmine] (http://pivotal.github.com/jasmi
 
 Jasmine itself includes excellent libraries for defining tests. However, it can be a little intimidating figuring out exactly how to structure things - what do you do with the nested describe blocks for instance? GluJS adds a very thin layer of alias functions over Jasmine to strongly guide you down the optimal path for reactive UI testing.
 
-Specifically, gluJS strongly encourages story-based specifications as follows:
+Specifically, GluJS strongly encourages story-based specifications as follows:
 
 ###Given
 
@@ -71,7 +71,7 @@ and the second one:
 
 We instantly notice that the first 2 steps are the same, and only the last step is different. Once you add a full set of descriptive user stories, you're going to find that every specification story overlaps with at least one other, leading to a tremendous amount of duplication and also making it difficult to see what is going on.
 
-While we could keep these two stories separate, gluJS with Jasmine gives us the ability to add the second story as a *branch* of the first. We do this in code by simply adding another block *after* the first as follows:
+While we could keep these two stories separate, GluJS with Jasmine gives us the ability to add the second story as a *branch* of the first. We do this in code by simply adding another block *after* the first as follows:
 
 ```coffeescript
 Given 'the Hello World application on launch', ->  
@@ -109,7 +109,7 @@ Usually you are going to define and set up your root view model using `glu.model
       Meaning -> vm = glu.model 'helloworld.main'
 ```
 
-Most of the time, you are also going to be setting up a simulated "back end" so that you can track and respond to Ajax calls. The application will make its calls as usual, only glu will now intercept and process the Ajax calls locally without a server having to be involved. Of course you'd need a reasonable way to quickly declare Ajax "routes" (url matching patterns) and serve up data. This is exactly what gluJS provides and is described under the 'data' and 'ajax' section below.
+Most of the time, you are also going to be setting up a simulated "back end" so that you can track and respond to Ajax calls. The application will make its calls as usual, only glu will now intercept and process the Ajax calls locally without a server having to be involved. Of course you'd need a reasonable way to quickly declare Ajax "routes" (url matching patterns) and serve up data. This is exactly what GluJS provides and is described under the 'data' and 'ajax' section below.
 
 Lastly, you may want to advance the application to a beginning state by initializing the view model and answering the Ajax calls it makes on initialization. For instance, if the Hello World app needs to get a roster of other people who are also logged in, you might want to advance to that point:
 
@@ -172,13 +172,13 @@ If it is responding to a dialog there's a special method off of the confirm meth
       Meaning -> vm.confirm.respondWith('yes')
 ```
 
-Note that we should never set a formula or invoke anything directly that isn't bound to a control - the point of gluJS story-based testing is that you emulate what the *user does* or what the *app does in response or on a timer*, so that the tests are as non-brittle, full-coverage, and as easy-to-follow as possible. Let the application handle its own internals.
+Note that we should never set a formula or invoke anything directly that isn't bound to a control - the point of GluJS story-based testing is that you emulate what the *user does* or what the *app does in response or on a timer*, so that the tests are as non-brittle, full-coverage, and as easy-to-follow as possible. Let the application handle its own internals.
 
 #####Including the view in testing (sidebar)
 
 We have also experimented with "view-inclusive" testing, but that makes things more difficult.
 
-We know that we don't want to render the DOM during normal cycles(too slow and difficult to control), but that still leaves us two options. First, we could just let gluJS bind the ExtJS object tree but not render it. That's simple (coffeescript):
+We know that we don't want to render the DOM during normal cycles(too slow and difficult to control), but that still leaves us two options. First, we could just let GluJS bind the ExtJS object tree but not render it. That's simple (coffeescript):
 
 ```coffeescript
     var vm = glu.model ('helloworld.main')
@@ -191,9 +191,9 @@ That would allow us to validate the bindings (in addition to the behavior) by dr
 
 Unfortunately, many ExtJS controls assume that they are rendered before you can begin poking around with them. "Headless" adapters for ExtJS that would correct that behavior are possible (we've built some) but too much effort at the moment for little return. Since bad bindings typically throw errors in any case, and since you can validate your bindings with existing support, there is not much to be gained by driving the tests through the controls themselves.
 
-The second remaining option is simulating the DOM within a javascript engine like Node.js. While entirely possible, that becomes a more complicated process all around and defeats the gluJS simplicity of a single developer being able to immediately produce and run testable code without additional installs or environment setups.
+The second remaining option is simulating the DOM within a javascript engine like Node.js. While entirely possible, that becomes a more complicated process all around and defeats the GluJS simplicity of a single developer being able to immediately produce and run testable code without additional installs or environment setups.
 
-Since the views are behaviorless within gluJS and everything "interesting" (custom) goes into the view model, testing the view models is a simple and sufficient way to provide excellent coverage. 
+Since the views are behaviorless within GluJS and everything "interesting" (custom) goes into the view model, testing the view models is a simple and sufficient way to provide excellent coverage. 
 
 If you're still interested in "headless ExtJS controls" and perhaps a quick "binding validation check", let us know since we're considering addressing those points in the future.
 
@@ -216,7 +216,7 @@ Jasmine already has excellent support for manually controlling the clock to hand
 
 ####Ajax responses
 
-GluJS lets you simulate Ajax responses using the gluJS [AJAX simulator](simulation-framework.md#ajax-simulator). You define the routes during setup and turn on the framework for *capture*. As the calls are made, instead of being delivered to the browser for an actual AJAX call, they are stored up in each captured route by name.
+GluJS lets you simulate Ajax responses using the GluJS [AJAX simulator](simulation-framework.md#ajax-simulator). You define the routes during setup and turn on the framework for *capture*. As the calls are made, instead of being delivered to the browser for an actual AJAX call, they are stored up in each captured route by name.
 
 You will typically have a different route for each type of service call and name them accordingly. That way you can manage the responses separately and logically.
 
@@ -253,7 +253,7 @@ Given 'the Hello World application on launch', ->
 
 `ShouldHave` blocks assert expectations about the result of the store step - what *should have* happened or what the UI now *should have*. It is an alias on the Jasmine `expect` function, though we prefer to use `ShouldHave` as it keeps writing all of our expectation sentences consistently. The ShouldHave function receives two arguments - the expectation in plain English, and then a function that contains one or more *expectations*, also known as *assertions*.
 
-For the expectations, we simply use the excellent out-of-the-box Jasmine matchers. However, there are a number of gluJS helper functions:
+For the expectations, we simply use the excellent out-of-the-box Jasmine matchers. However, there are a number of GluJS helper functions:
 
 ####getRequestsFor
 

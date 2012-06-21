@@ -2,9 +2,9 @@
 
 The view is the final piece of the puzzline in creating rich, reactive applications.
 
-For the most part, the point of gluJS is that it lets the underlying view provider - for now ExtJS - really shine. GluJS takes care of the high-friction parts - the specification and management of the behavior and enterprise glue - so that your ExtJS can be as straightforward and as uncomplicated as possible. That's good, because even straightforward ExtJS view definitions can take time to master.
+For the most part, the point of GluJS is that it lets the underlying view provider - for now ExtJS - really shine. GluJS takes care of the high-friction parts - the specification and management of the behavior and enterprise glue - so that your ExtJS can be as straightforward and as uncomplicated as possible. That's good, because even straightforward ExtJS view definitions can take time to master.
 
-The remainder of this section will assume that you are using ExtJS as your view provider within gluJS (since that is all we initially support).
+The remainder of this section will assume that you are using ExtJS as your view provider within GluJS (since that is all we initially support).
 
 ###Defining a view
 
@@ -35,7 +35,7 @@ Sometimes you want to separate a large view up into smaller parts for easier man
 
 The typical ExtJS way is to define a new component class and register its alias so that it is available as an `xtype`.
 
-A shortcut within gluJS is simply to define a view as normal and then reference it as a "local xtype" without declaring a global widget. Each application/application module within gluJS has its own distinct namespace, so rather than register globally gluJS takes care of the "local lookup" for you (and keeps widgets from stomping on one another without spelling out a long namespace).
+A shortcut within GluJS is simply to define a view as normal and then reference it as a "local xtype" without declaring a global widget. Each application/application module within GluJS has its own distinct namespace, so rather than register globally GluJS takes care of the "local lookup" for you (and keeps widgets from stomping on one another without spelling out a long namespace).
 
 An example of including one view in another:
 
@@ -55,7 +55,7 @@ This just "inlines" the declarative JSON into the parent view - simple.
 
 ###Materializing a view
 
-As we saw earlier, views are "materialized' automatically by gluJS. You define them, but you don't manipulate them in any way. Instead, they are created and inserted for you.
+As we saw earlier, views are "materialized' automatically by GluJS. You define them, but you don't manipulate them in any way. Instead, they are created and inserted for you.
 
 You begin by using one of two glu components : `glu.viewport` and `glupanel`. The former creates an ExtJS viewport for you, while the latter is an `xtype` usable anywhere within an ExtJS application.
 
@@ -138,7 +138,7 @@ glu.defView ('assets.asset',{
 });
 ```
 
-Now gluJS knows to nest the corresponding view within the proper location *and* bind it to the nested view model referenced by 'detail'.
+Now GluJS knows to nest the corresponding view within the proper location *and* bind it to the nested view model referenced by 'detail'.
 
 Note that you can pass in parent arguments (like 'region') which will override anything set in the defined view. This lets you re-use views across different contexts - the included assets example re-uses an assets view both as inline detail and a pop-up inspector/editor.
 
@@ -154,7 +154,7 @@ Cutting and pasting the 90% of code that each screen would share in such a scena
 
 A logical alternative would be through the ExtJS inheritance model. That would eliminate cut-and-paste code, but introduce difficult-to-follow complexity. You don't want a class tree of widgets to manage; you just want different screens to look the same.
 
-A much simpler approach is one provided by gluJS and modeled after the standard web templating of a *layout*.
+A much simpler approach is one provided by GluJS and modeled after the standard web templating of a *layout*.
 
 A layout is simply an 'abstract' view factory (it is never instantiated directly) that is referenced by actual views. The layout view is what is actually rendered: but it declares "points of interest" that can be supplied by the actual view. The function you provide as the factory accepts the actual view and can now use the properties it provides to populate these points of interest in the layout.
 
@@ -168,11 +168,11 @@ asset.views.sidebysidelayoutFactory = function(actualView){
         title : actualView.title + ' Module',
         layout : 'hbox',
         tbar : [{
-            text:'New'
+            text:'~~new~~'
         },{
-            text:'Close'
+            text:'~~close~~'
         },{
-            text:'Actions',
+            text:'~~actions~~',
             menu: actualView.customActions
         }],
         items : [actualView.leftGrid, actualView.rightGrid]
@@ -190,7 +190,7 @@ glu.defView('asset.assets', {
     },
     title : 'Assets',
     customActions : [{
-        text : 'Archive',
+        text : '~~archive~~',
         handler : '@{archive}'
     }]
 });
@@ -246,7 +246,7 @@ Now for the binding directives (these all come immediately after the `@` sign an
 
  * `>` One-way binding - update the view when the control changes, but not vice versa, making the control binding "read-only". Example: `value:'@>{displayText}'` will initially set the value to `displayText` and will track changes to that in the view model, but will never itself update the view model.
 
- * `?` Optional binding - do not raise an error if the matching view model property is not found. This is usally only used when working with view adapters (extending gluJS) as ordinarily you want to know when you have a "bad binding'. Example: `value:'@?{displayText}'` will let the application continue smoothely even if there is no `displayText` on the view model.
+ * `?` Optional binding - do not raise an error if the matching view model property is not found. This is usally only used when working with view adapters (extending GluJS) as ordinarily you want to know when you have a "bad binding'. Example: `value:'@?{displayText}'` will let the application continue smoothely even if there is no `displayText` on the view model.
 
 ###Binding properties
 
@@ -264,7 +264,7 @@ glu.defModel('helloworld.main',{
 glu.defView('helloworld.main',{
     title: '@{message}',
     tbar : [{
-        text : 'Coming/Going',
+        text : '~~arrivalStatus~~',
         pressed : '@{arriving}'
     }]
 });
@@ -282,7 +282,7 @@ Controls in turn may update one or more properties they are bound to. Controls d
 
 Control config properties that are available for two-way binding per control are documented in the binding adapter API documentation.
 
-In the example above, we already saw the `title: '@{message}'` binding. Since the title of a panel isn't editable, there is no event to listen on and no logical control -> view model binding. However, the `pressed` state of the button *is* changeable by the user (because it is a toggle button). The `button` adapter for GluJS knows to listen on the `toggle` event from the button; as the user toggles the button gluJS will update the `message` property accordingly.
+In the example above, we already saw the `title: '@{message}'` binding. Since the title of a panel isn't editable, there is no event to listen on and no logical control -> view model binding. However, the `pressed` state of the button *is* changeable by the user (because it is a toggle button). The `button` adapter for GluJS knows to listen on the `toggle` event from the button; as the user toggles the button GluJS will update the `message` property accordingly.
 
 ####Inline text formulas
 
@@ -296,14 +296,14 @@ glu.defModel('helloworld.main',{
 //View
 glu.defView('helloworld.main',{
     tbar : [{
-        text : 'Coming/Going',
+        text : '~~arrivalStatus~~',
         pressed : '@{arriving}',
         cls : 'button-arriving-@{arriving}'
     }]
 });
 ```
 
-This will make the `cls` change from 'button-arriving-true' to 'button-arriving-false' dynamically (and the gluJS component adapter will set the css class accordingly).
+This will make the `cls` change from 'button-arriving-true' to 'button-arriving-false' dynamically (and the GluJS component adapter will set the css class accordingly).
 
 The preferred option is to make the formula explicit in the view model, but this on occasion makes more sense (when there are many of them or when writing a transformer). And of course when the strings are meant to be read, the preferred option is to use the localization facility instead so no text is hard-coded and unlocalizable.
 
@@ -311,7 +311,7 @@ The preferred option is to make the formula explicit in the view model, but this
 
 Sometimes when the user manipulates a control, it isn't so much a state that changes, but a one-time request for some action. For instance, when the user clicks a non-toggle button, they aren't changing a state but just signifying "execute the command attached to the button". Likewise in a grid, when the user double-clicks a row no state actually changes - instead it usually means "open this item up for further inspection".
 
-These are called *commands* within gluJS. As we saw earlier in the view model, a gluJS command is as simple a function on a view model.
+These are called *commands* within GluJS. As we saw earlier in the view model, a GluJS command is as simple a function on a view model.
 
 ExtJS components raise command-oriented events in two ways. First, through events like `click` and `doubleclick`. Second, through shortcuts like `toggleHandler` and `handler`.
 
@@ -339,7 +339,7 @@ glu.defView('assets.main',{
         itemdblclick : '@{openAsset}'
     },
     tbar : [{
-        text : 'Archive',
+        text : '~~archive~~',
         handler : '@{openAsset}'
     }]
 });
@@ -369,11 +369,11 @@ glu.defModel ('assets.main',{
 });
 glu.defView ('assets.main',{
     tbar : [{
-        text : 'Archives',
+        text : '~~archives~~',
         handler : '@{openScreen}',
         value : 'archiveSet'
     }, {
-        text : 'Live',
+        text : '~~live~~',
         handler : '@{openScreen}',
         value : 'openSet'
     }]
@@ -386,23 +386,198 @@ GluJS automatically appends the remaining arguments from the calling event as de
 
 We are planning on adding more explicit parameterization to the binding syntax in the future so that we are not leaning on additional properties in the control that may have other meanings. For instance, something like `@handler:{openScreen('archiveSet')}`. As always, feedback is welcome.
 
-###Container binding
+###Container binding (templating)
 
-Static views and There are often cases where you have a variable number of items on the screen that aren't rows in a grid. For example:
+Static views are usually not all there is in a reactive application. In fact, a very common pattern is managing and rendering a list of items with:
 
- * multiple tabs that are added by actions and closable by the user
- *
+ * a changing list of (possibly mixed in type) models
+ * a way to display the list visually by binding to the list and rendering each item through a 'template'
+ * (usually) a single 'active' or 'focused' item
+ * (sometimes) the ability to select multiple items (for an operation).
 
-ExtJS has an interesting omission. You can render a row for each
+ExtJS has some support for this. The most obvious example is the grid, which renders each item (a record or model) in a list (store) - but you have to use grid columns or your own HTML renderers and not ExtJS controls, and it is assumed that all rows are the same. A less-commonly used option is the `DataView`. It is much the same as a grid, but instead of the template being a set of ExtJS components (as one would expect), it is instead a raw HTML `xtemplate` that you supply and again assumes similar rows. Furthermore, since the appeal of a widget set like ExtJS is that you *are not having to write* cross-browser HTML, using the `DataView` can be frustrating and counter-intuitive.
 
-But if you want to use actual ExtJS controls for each row, there is no such support.
-`{items : '@{assetList}'}`
+ExtJS also supports normal `container` structures like tabs, accordion layouts, menus, etc. which *do* let you put a variety of items inside them. However, these don't let you bind what they contain to a store. You must manually create and maintain the appropriate child components. This is obviously redundant and repetitive for grids and dataviews; it is equally redundant and repetitive here.
+
+GluJS unifies the 'templated list' pattern into a single, simple concept called `container binding` or more specifically `items binding`.
+
+In short, instead of having limited, manual, idiosyncratic support for rendering a 'templated' list, you can now enable *any* container within ExtJS simply by binding its `items` property to a GluJS list or ExtJS store:
+
+```javascript
+glu.defModel('assets.main',{
+    assetList : {
+        mtype : 'list'
+    }
+});
+glu.defView('assets.main',{
+    layout : 'vbox',
+    items : '@{assetList}'
+});
+glu.defView('assets.asset',{
+    xtype : 'form',
+    items : [{ xtype: 'displayfield'},{xtype:'button}] //etc...
+});
+```
+
+The preceding example will add an asset form panel (laid out vertically within the main view) for each view model within the assets list. If an asset is added, its corresponding view will show up in the correct spot just like a row in a grid. If the asset is removed from the list, it is removed from the view.
+
+This works for tab panels too:
+
+```javascript
+glu.defView('assets.main',{
+    xtype : 'tab',
+    items : '@{assetList}'
+});
+```
+
+In short, it works for any ExtJS control that is a `container` and has an `items` property. It also supports common ExtJS shortcuts to single components off of a control. Consider the `tbar` shortcut, which lets you add in an array of button definitions as a short cut to `{xtype : 'toolbar', items : [buttonsArray]}`:
+
+```javascript
+glu.defView('assets.main',{
+    xtype : 'tab',
+    tbar : '@{assetList}'
+});
+```
+
 ####Item Templates
 
+The previous example raises an interesting question: isn't it a bit overkill to force each button to be its own GluJS view? What if I just want a "one-off" template against that record/model/view model?
+
+In the parent container, you can indicate that you want to provide a custom template by providing an object or function as the `itemTemplate`. Let's say I have the items in a menu bound to a list (quite common). Perhaps the concept is that the server provides a list of my favorite shortcut screens (and I need this to fit within a menu instead of looking as a combo box). When you pick a favorite, it adds it as a tab. The definitions would look like this (concentrating on the view side of things):
+
+```javascript
+glu.defModel('assets.main',{
+    favoriteList : {
+        mtype : 'store'
+        //more store setup goes here...assume a 'name' field and an 'id' field.
+    },
+    addScreen : function (screenId){
+        //...add the appropriate screen to the list of favorites kept in a tab view
+    }
+});
+glu.defView('assets.main',{
+    tbar : [{
+        text : '~~screens~~',
+        menu : [{
+            text : '~~favorites~~',
+            menu : '@{favoriteList}' //shortcut definition
+            itemTemplate : {
+                text : '@{name}',
+                value : '@{id}',
+                handler : '@{addScreen}'
+            }
+        }]
+    }]
+});
+```
+
+The 'Favorites' menu item will now follow the contents of the favorites list. When an item is selected, it will invoke a parameterized command (`addScreen`) with the appropriate value parameter. If `favoriteList` is modified, the menu contents will update themselves to match.
+
+Item templates (and item binding in general) are a powerful way to extend ExtJS 'inline'; in many situations it completely replaces the need for custom components.
 
 ###Localization
-`~~~title~~~`
 
+GluJS is an enterprise framework that assumes every application should be localized. Since every application should be localized and all text displayed to the user needs to be localized, it's important to bake that in as an easy-to-use facility.
+
+To make sure text is localized, simply supply a *localization key* instead of the actual text. You may have noticed this pattern throughout the examples - you simply wrap the key in a pair of double-tildes (`~~`). The view above declares three localization keys - `screens` and `favorites`. To supply these, simply provide a localization object for that user:
+
+**English locale object for preceding example code**
+```javascript
+assets.locale = {
+    screens : 'Screens',
+    favorites : 'Favorites'
+}
+```
+
+We recommend that this object be supplied in an appropriately named 'locale' file. However, supplying the appropriate file for the user's locale is outside of the scope of gluJS as a client side library (since sometimes you want to base that on information provided by the server instead of by the client's browser) though it is a fairly simple item to implement.
+
+When you need to localize something within the view model, use the `this.localize` view model method (see the API docs).
+
+The default localizer has a simple but elegant scheme for managing your locale keys. You can keep them all at the root level (`assets.locale`) if you'd like. Or when some seem to correspond more with a particular screen, you can organize them by the names of your view model. For instance, if you have a child view model, you can do the following:
+
+```javascript
+glu.defView ('assets.main',{
+    title : '~~title~~',
+    layout : 'border',
+    tbar : [{ text : '~~name~~'}],
+    items : [{
+        xtype : 'grid',
+        region : 'center',
+        //a bunch of grid definition here...
+    },{
+        region : 'right',
+        xtype : '@{detail}'
+    }]
+});
+glu.defView ('assets.asset',{
+    title : '~~title~~',
+    xtype : 'form',
+    items: [{
+        fieldLabel : '~~name~~',
+        value : '@{name}'
+    },{
+        //...etc...
+    }]
+});
+glu.assets.locale={
+    name : 'Name',
+    main : {
+        title : 'Assets Application'
+    },
+    asset : {
+        title : 'Asset Detail',
+        name : 'Asset Name' //overrides the one in the root
+    }
+};
+```
+
+This organization by view model effectively and naturally 'namespaces' your localization keys to avoid conflicts without them becoming long and unwieldy.
+
+####Substitutions (parameterized localization)
+
+Simple text is not always enough - sometimes you need to localize a phrase with arbitrary value substitutions in the middle. You can't simply concatenate in your view model because different languages will order things differently. For that, gluJS supports `string format` like functionality.
+
+When localizing from a view model, along with the key you can pass in values that the key will use in rendering the text. If you want to make sure you can pass in the first name on the message, just do this:
+
+```javascript
+//View model
+glu.defModel('helloworld.main',{
+    arriving : true,
+    firstName : 'Mike',
+    message$: function() {
+        return glu.localize (this.arriving ? 'greeting' : 'farewell', {name:this.firstName});
+    }
+});
+//View
+glu.defView('helloworld.main',{
+    title: '@{message}',
+    tbar : [{
+        text : '~~arrivalStatus~~',
+        pressed : '@{arriving}'
+    }]
+});
+//Locale
+glu.helloworld.locale = {
+    greeting : 'Hello {name}',  //parameterized with a name
+    farewell : 'Goodbye {name}'
+};
+```
+
+You can use named parameters (shown above) or positional parameters like `{0}`,`{1}`, etc. Through the "magic" of glu formula support, the message will now be recalculated whenever either `arriving` *or* `firstName` changes.
+
+There is currently no support within the view for parameterizing the locale key. However, there is a "backdoor" that lets you access view model properties from within your locale key:
+
+```javascript
+glu.assets.locale = {
+    removeAssetsMessage:'This will archive {assetSelections.length} asset(s). Would you like to continue?'
+}
+```
+
+Will work even if you don't provide the key, assuming `assetSelections` is an array property on the view model. Keep in mind that this is probably not the best way to organize things because it forces your locale keys to be somewhat "viewmodel-aware" but is provided as an option for corner-cases.
+
+####Custom localizer
+
+If you already have a localization scheme in place at a higher level of your application, or prefer a different organization, you can replace the default localizer with one of your own by providing a function to `glu.setLocalizer(function(config){})`. The provided function will be supplied a `config.key`, a `config.ns`, a `config.viewmodel` and a `config.params` for each localization call and you can then locate your localized text as needed.
 
 ###Binding by convention
 

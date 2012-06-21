@@ -1,4 +1,4 @@
-##Extending gluJS
+##Extending GluJS
 
 
 ###view adapters

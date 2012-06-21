@@ -1,6 +1,6 @@
 ##Simulation framework
 
-In this section, we go deeper into the setup and use of the gluJS simulation framework.
+In this section, we go deeper into the setup and use of the GluJS simulation framework.
 
 ###Ajax simulator
 
@@ -112,7 +112,7 @@ Race conditions are easily catchable because now you can spell out the exact ord
 
 The Ajax simulator is *not just for testing*. It also lets you quickly stand up your client application for interactive demonstration and testing purposes. Simply set `autoRespond` to true in the back end and instead of queuing requests up, they will automatically respond asynchronously from the in-memory backend. If the application is a module in a larger application that may already be hitting a live backend, you can still use the simulation framework: just set `fallbackToAjax` to true and routes that you are not capturing will hit the actual server as usual.
 
-The ability to 'live demo' a client UI iteration is one of the more powerful features of gluJS and can play a key part in a fast, Agile development workflow. It also can be a very useful way to conduct user training when constructing a fully separate training back-end is too costly to manage.
+The ability to 'live demo' a client UI iteration is one of the more powerful features of GluJS and can play a key part in a fast, Agile development workflow. It also can be a very useful way to conduct user training when constructing a fully separate training back-end is too costly to manage.
 
 ###Data simulator
 
@@ -123,7 +123,7 @@ Faking out the back-end services so that they actually, pretty-much *work* is ex
  3. By enabling a 'live demo' mode, it lets stakeholders quickly communicate likes and dislikes on the developing interface very early in the design until after everything is set in stone
  4. Since stakeholders often are "touch and see" oriented instead of dealing with abstract development arcana, this process can actually be used to flesh out service contracts and patterns in advance of their implementation.
 
-Since back-ends revolve around persistent data in databases, gluJs will not only have to be able emulate AJAX, but also provide a simple way to fake persistent storage. And so it does.
+Since back-ends revolve around persistent data in databases, GluJS will not only have to be able emulate AJAX, but also provide a simple way to fake persistent storage. And so it does.
 
 In the example under the routes, there is a line in which we set up an in-memory database:
 
@@ -131,7 +131,7 @@ In the example under the routes, there is a line in which we set up an in-memory
     assets = glu.test.createTable(assets.models.asset, 11);
 ```
 
-That will set up a database table based on the `fields` definition in the asset model (which can be a gluJS view model or an ExtJS Model construct0). The second argument (11) tells it to populate with 11 faked rows using the gluJS fake data helpers. Alternately, you can provide an array of objects and those will be read into the database upon initialization.
+That will set up a database table based on the `fields` definition in the asset model (which can be a GluJS view model or an ExtJS Model construct0). The second argument (11) tells it to populate with 11 faked rows using the GluJS fake data helpers. Alternately, you can provide an array of objects and those will be read into the database upon initialization.
 
 The returned table object supports the usual set of CRUD operations:
 
@@ -167,9 +167,9 @@ The database is one-table at a time for now. Anything more complex (involving jo
 
 ####Fake data
 
-You can lean on the fake data API which will provide fake data based on an analysis of the names of the fields, their data types, and their constraints. Often you won't be using it directly but simply relying on the gluJS data layer to create it for you when you make a sample table. See the API for more details.
+You can lean on the fake data API which will provide fake data based on an analysis of the names of the fields, their data types, and their constraints. Often you won't be using it directly but simply relying on the GluJS data layer to create it for you when you make a sample table. See the API for more details.
 
-Building out the ease and sophistication of the ajax and data frameworks is one of our top priorites on the gluJS roadmap and we are greatly interested in your feedback.
+Building out the ease and sophistication of the ajax and data frameworks is one of our top priorites on the GluJS roadmap and we are greatly interested in your feedback.
 
 
 *Copyright 2012 Mike Gai. All rights reserved.*

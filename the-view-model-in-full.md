@@ -1,6 +1,6 @@
 ##The view model in full
 
-I promised earlier that we would return to the view model; after all that is the heart of gluJS. Below is a more in-depth walk-through of how a view model comes together.
+I promised earlier that we would return to the view model; after all that is the heart of GluJS. Below is a more in-depth walk-through of how a view model comes together.
 
 The view model is the "common sense" representation of application state and behavior. A 'root' view model represents
 the application as a whole (or the module if you are a sub-app within a 'portal'), while other view models represent
@@ -110,9 +110,9 @@ var vm = glu.model('example.main');
 
 Javascript has a different notion of `this` than more traditional Object-Oriented languages. Since functions are first-class and can be passed around and called from another function and are not tied intrinsically to an object instance, the meaning of `this` is determined by the calling context and so can be ambiguous. This often leads to many subtle and not-so-subtle bugs.
 
-One way around this is to set a `me` variable to the appropriate scope and use it instead so that it is enclosed within the function. That means the value of `me` will be fixed. That is certainly an option within gluJS. However, this still means you need to track on a context-by-context basis what the value of `me` is.
+One way around this is to set a `me` variable to the appropriate scope and use it instead so that it is enclosed within the function. That means the value of `me` will be fixed. That is certainly an option within GluJS. However, this still means you need to track on a context-by-context basis what the value of `me` is.
 
-GluJS cuts through this ambiguity by *always* making the scope of `this` the containing view model. If you use gluJS as intended, you will never have to provide a `scope` value on any callback and `this` will always have a clear, unambiguous meaning.
+GluJS cuts through this ambiguity by *always* making the scope of `this` the containing view model. If you use GluJS as intended, you will never have to provide a `scope` value on any callback and `this` will always have a clear, unambiguous meaning.
 
 
 ### View model parts
@@ -221,7 +221,7 @@ defModel ('assets.main',{
 });
 ```
 
-The provided fields are added as normal properties to the view model and indeed can overlap with them (you can declare them both in the fields and in the main body normally). The only thing that is different is that they are specially marked by gluJS for serialization.
+The provided fields are added as normal properties to the view model and indeed can overlap with them (you can declare them both in the fields and in the main body normally). The only thing that is different is that they are specially marked by GluJS for serialization.
 
 This lets you do a few special things. First, you can load data into them (deserialize) in one step using a `.loadData` method.
 
@@ -239,7 +239,7 @@ In addition, a few more options are surfaced. First, dirty tracking is automatic
 
 The `commit` function lets you set the current values as the new "original" values, so the data model will no longer be dirty. This is usually done after a save of some sort. The `revert` restores all of the values to the original state (and so the view model is no longer dirty). Note that you can bind a button directly to the `revert` function if you'd like as it is built-in.
 
-With this pattern, your data does not have to be arbitrarily separated into a pure 'model' with no behavior. After all, if you are building a UI you are going to be displaying that data on the screen, and you're going to need all the rich reactive behavior gluJS provides. The view model concept unifies model with controller and makes your architecture a whole lot simpler - and you can still separate out your "data definitions" (models) for re-use by leveraging `modelType` as needed.
+With this pattern, your data does not have to be arbitrarily separated into a pure 'model' with no behavior. After all, if you are building a UI you are going to be displaying that data on the screen, and you're going to need all the rich reactive behavior GluJS provides. The view model concept unifies model with controller and makes your architecture a whole lot simpler - and you can still separate out your "data definitions" (models) for re-use by leveraging `modelType` as needed.
 
 ### Formulas
 
@@ -276,7 +276,7 @@ saveIsEnabled$ : function(){
 
 GluJS is a framework for quickly developing real applications with complex navigation and screens. Very often you'll want to split your
 view models in parts. The initial example above has a list of 'student' view models. This list could correspond on the screen to
-a set of items in a mobile list or a set of tabs. This is just one of the built-in UI composition patterns within gluJS.
+a set of items in a mobile list or a set of tabs. This is just one of the built-in UI composition patterns within GluJS.
 
 Submodels are indicated by using the `mtype` property within a nested object.
 
@@ -304,7 +304,7 @@ glu.defModel ('assets.asset',{
 
 #### Lists and stores
 
-You might have noticed above that `mtype` for assetsList is 'list'. The gluJS list object fills in a gap left by frameworks like ExtJS. Many times you do not need a full `store` with support for proxies, flattening of json objects through a reader, and the other facilities provided by a store. You just need a simple observable list that can notify components when an item is added or removed. That's exactly what the 'list' provides.
+You might have noticed above that `mtype` for assetsList is 'list'. The GluJS list object fills in a gap left by frameworks like ExtJS. Many times you do not need a full `store` with support for proxies, flattening of json objects through a reader, and the other facilities provided by a store. You just need a simple observable list that can notify components when an item is added or removed. That's exactly what the 'list' provides.
 
 While a list can contain any value, the most powerful use for a `list` class is when the list contains view models of its own. That naturally can be bound to a set of tabs, cards, or even panels laid-out horizontally or vertically on the screen ('repeaters'). For instance, if you want to dynamically add tabs (we'll call them *screens* below) based on different selections of the user, then the view model might look like the following:
 
@@ -408,7 +408,7 @@ A common way to do this would be to separate out the 'refresh' into a function a
     },
 ```
 
-In other words, you add the behavior on the triggering end of things. But if there are multiple triggers, this creates redundancies. With gluJS, you could simply state the following instead:
+In other words, you add the behavior on the triggering end of things. But if there are multiple triggers, this creates redundancies. With GluJS, you could simply state the following instead:
 
 **Example (RECOMMENDED)**
 
@@ -429,7 +429,7 @@ In other words, you add the behavior on the triggering end of things. But if the
 Later when you realize that you'd like to load only on an explicit refresh or just need to temporarily suppress the behavior for
 debugging, you can just comment it out and "switch off" the behavior in one place.
 
-If you need to add new behavior to some or all of the property events, you can do that as a separate "rule". The ordering is deterministic; gluJS will process in the order you include them in your view model declaration.
+If you need to add new behavior to some or all of the property events, you can do that as a separate "rule". The ordering is deterministic; GluJS will process in the order you include them in your view model declaration.
 
 While this is an entirely optional pattern, it is a natural and powerful fit for building modular reactive UIs.
 
@@ -446,7 +446,7 @@ The methods are as follows (please refer to the API docs for details):
 
   *   `ajax` - makes a call that is scoped to the view model and has a few convenience hooks
   *   `model` - makes a child model that is appropriately parented to the current view model
-  *   `localize` - returns the value for the provided localization key and provides the localizer with the current context
+  *   `localize` - returns the value for the provided localization key and provides the localizer with the current context. See the [Localization](the-view-and-binding-in-full.md#localization) section.
   *   `confirm` - asks for a confirmation from the user
   *   `message` - returns a message to the user
   *   `open` - opens a user pop-up screen that is itself a view model
@@ -489,7 +489,7 @@ Second, if it is a confirmation, use the `this.confirm`, which has the same synt
 
 The naming pattern we use for a confirmation of a command is to call the first step the actual command ('removeAssets') and then the second step after being confirmed simply 'removeAssetsActual'.
 
-We are in fact looking into formalizing that as an automatic gluJS pattern - feed back is welcome.
+We are in fact looking into formalizing that as an automatic GluJS pattern - feed back is welcome.
 
 Finally, opening up a full pop-up window in which you have complete control - such as a wizard, a modal edit window, or a configuration screen - is done through then `open` function:
 
@@ -525,7 +525,7 @@ glu.defModel('assets.options', {
 });
 ```
 
-Binding adapters within gluJS will control the accessibility of any 'close' buttons to match the state of `closeIsEnabled`.
+Binding adapters within GluJS will control the accessibility of any 'close' buttons to match the state of `closeIsEnabled`.
 
 ###View model mixins
 Often different view modesl will share similar structures within an application, or two view models will be closely related but only with a slight twist between them. In those cases, you'll want to use *mixins*.
@@ -548,7 +548,7 @@ glu.defModel('assets.archivedAsset',{
 });
 ```
 
-One of the design goals of gluJS was to avoid the complexity of inheritance patterns within Javascript and instead favor object composition. There is no support for chaining method calls to a parent 'class'. Whenever you run into situations where you might be tempted to use inheritance, there's usually another way to break down the problem. A common technique is a 'virtual method' such as having the mixin call another, absent function provided by the target view models:
+One of the design goals of GluJS was to avoid the complexity of inheritance patterns within Javascript and instead favor object composition. There is no support for chaining method calls to a parent 'class'. Whenever you run into situations where you might be tempted to use inheritance, there's usually another way to break down the problem. A common technique is a 'virtual method' such as having the mixin call another, absent function provided by the target view models:
 
 ```javascript
 //the base mixin
