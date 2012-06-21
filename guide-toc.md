@@ -80,7 +80,7 @@
         * [Custom localizer](the-view-and-binding-in-full.md#custom-localizer)
     * [Binding by convention](the-view-and-binding-in-full.md#binding-by-convention)
 * [Extending GluJS](extending-glujs.md#extending-glujs)
-    * [view adapters](extending-glujs.md#view-adapters)
+    * [View adapters](extending-glujs.md#view-adapters)
     * [view transformers](extending-glujs.md#view-transformers)
         * [Using a view transformer to build an authorization interceptor](extending-glujs.md#using-a-view-transformer-to-build-an-authorization-interceptor)
 

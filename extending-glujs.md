@@ -1,7 +1,7 @@
 ##Extending GluJS
 
 
-###view adapters
+###View adapters
 
 
 ###view transformers

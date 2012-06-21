@@ -272,6 +272,14 @@ saveIsEnabled$ : function(){
 }
 ```
 
+Here's a trick about isValid functions: you can supply a bit of text instead of `false` and it will count as `false`. This let's you return an error message to a `valid` component binding in a single pass:
+
+```javascript
+nameIsValid$ : function(){
+    return this.name.substring(0,1)==='Z' ? true : 'The name must start with Z';
+}
+```
+
 ### Submodels / child view models
 
 GluJS is a framework for quickly developing real applications with complex navigation and screens. Very often you'll want to split your
@@ -335,7 +343,7 @@ Reactors and formulas are automatically attached/detached based on the current c
 
 The idea of a tree of collaborating view models is a key organizing pattern to larger applications. It lets you break down the application into component parts, while letting them naturally reference one another without having to worry about explicit observer patterns. You can even think of it as giving you a natural fine-grained message bus - put properties or events you are interested in globally at the root level, and more local properties/events lower down the chain.
 
-### Commands
+###Commands
 
 Whenever the user needs to take an action that isn't necessarily as simple as updating a property - especially when it involves
 an Ajax call - then that is a command.
@@ -361,7 +369,7 @@ for other behavior (like in a formula).
 
 Whenever possible, see if what you're trying to do can be reduced to a property and go with that.
 
-#### Guard functions
+####Guard functions
 
 Glu has some strong naming conventions around commands (as well as other properties). These are called *guard functions*. They are simply formulas that *guard* other properties or commands from being accessed and other than the naming convention, are nothing special. The list includes the following (assuming *foo* is the name of a property or command):
  * `fooIsEnabled`  - whether it is enabled/disabled
@@ -371,7 +379,7 @@ Glu has some strong naming conventions around commands (as well as other propert
 Following the naming pattern not only keeps your code consistent across time and developers, but also enables convention-based binding, a feature that reduces code clutter even further (see
 the section on [Binding by convention](the-view-and-binding-in-full.md#binding-by-convention)).
 
-### Reactors
+###Reactors
 
 The reactor pattern is simply a shortcut to managing "event observers". It's a powerful way to reduce code clutter and break
 out different UI behavior as "rules".  For certain reactive patterns, it lets you "plug in" new behavior in one spot without modifying (and possibly breaking) existing behavior.
