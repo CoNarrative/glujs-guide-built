@@ -26,9 +26,12 @@ Let's start with an example. Imagine a "Hello World" application. Except since w
  * When you click it, it flips over to "Goodbye World!"
 
 To formalize this a little, we'll put this in the shape of a user story. We are going to use the "Given, When, Should Have" format. In other words, almost any user story can be reduced to a few basic parts:
-  * *Given* - the initial state you're going to be describing
-  * *When*  - the change you are going to introduce (usually a user interaction, scheduled event, or feedback from the back-end)
-  * *Should have* - the "then" of what happens. In other words, it "should have" done one or more things in response, like change parts of the screen or talked to the back-end.
+
+ * *Given* - the initial state you're going to be describing
+
+ * *When*  - the change you are going to introduce (usually a user interaction, scheduled event, or feedback from the back-end)
+
+ * *Should have* - the "then" of what happens. In other words, it "should have" done one or more things in response, like change parts of the screen or talked to the back-end.
 
 With that in mind, the Hello World "story" specification might look like this:
 
