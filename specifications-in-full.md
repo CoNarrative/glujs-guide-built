@@ -14,11 +14,11 @@ Specifically, GluJS strongly encourages story-based specifications as follows:
 
 `Given` is used to setup an initial state and should only be used once at the beginning of each spec document. It accepts two arguments: first, a string description of the initial state, and second a nested function that will contain further definitions.
 
-Example (in coffeescript):
+Example (in CoffeeScript):
 
-```coffeescript
+```CoffeeScript
     Given 'the Hello World application on launch', ->
-      vm = null      
+      vm = null
 ```
 
 Any 'globals' for this specification should be defined immediately within the nested function so that they are available everywhere. Typically this includes the root vm you are testing, and often a simulated back-end.
@@ -34,15 +34,15 @@ When you nest it within another When statement, we call that adding a *step* to 
  4. When the user toggles their status (back)
     * (check another thing)
 
-we would do it like so (in coffeescript):
+we would do it like so (in CoffeeScript):
 
-```coffeescript
-Given 'the Hello World application on launch', ->  
+```CoffeeScript
+Given 'the Hello World application on launch', ->
   When 'the user toggles their status', ->
-    When 'the user toggles their status (back)', -> 
+    When 'the user toggles their status (back)', ->
 ```
 
-Since the `->` in coffeescript is just shorthand for a function declaration, the equivalent code in javascript is:
+Since the `->` in CoffeeScript is just shorthand for a function declaration, the equivalent code in javascript is:
 
 ```javascript
 Given ('the Hello World application on launch', function(){
@@ -53,7 +53,7 @@ Given ('the Hello World application on launch', function(){
 });
 ```
 
-The extra syntax in Javascript for defining nested functions is the one and only reason we tend to use coffeescript for our specifications - it keeps them compact and readable and easier to see in plain English.
+The extra syntax in Javascript for defining nested functions is the one and only reason we tend to use CoffeeScript for our specifications - it keeps them compact and readable and easier to see in plain English.
 
 Sometimes you want to "spec out" additional paths at a certain point in the walk-through. We call these *branches*. Let's say we have two similar stories:
  1. Given the Hello World application on launch
@@ -73,8 +73,8 @@ We instantly notice that the first 2 steps are the same, and only the last step 
 
 While we could keep these two stories separate, GluJS with Jasmine gives us the ability to add the second story as a *branch* of the first. We do this in code by simply adding another block *after* the first as follows:
 
-```coffeescript
-Given 'the Hello World application on launch', ->  
+```CoffeeScript
+Given 'the Hello World application on launch', ->
   When 'the user toggles their status', ->
     When 'the user toggles their status (back)', ->
       #stuff that deals with toggling the status back after the first toggle
@@ -88,9 +88,9 @@ Notice that 'Given' and 'When' blocks are simply structure and do *absolutely no
 
 ###Meaning
 
-`Meaning` is the block that actually advances the simulated state of the application. The goal is to let the view model "do its thing" entirely ignorant of whether it is running in test harness or as a live applicaiton. That means it has to deal with everything that could happen within the client. These break down into four basic categories:
+`Meaning` is the block that actually advances the simulated state of the application. The goal is to let the view model "do its thing" entirely ignorant of whether it is running in test harness or as a live application. That means it has to deal with everything that could happen within the client. These break down into four basic categories:
  *  *Simulation setup* - Before anything can run, the simulation must be placed into a defined test harness.
- *  *The user takes an action* - The user of the application at this point clicks, drags, or othewise interacts with the application, such as:
+ *  *The user takes an action* - The user of the application at this point clicks, drags, or otherwise interacts with the application, such as:
     * Clicks on a button (to execute a command)
     * Selects a row or item from a grid/list
     * Updates text in a text field or area
@@ -103,7 +103,7 @@ GluJS combined with Jasmine provides complete simulation coverage for all four c
 ####Simulation setup
 
 Usually you are going to define and set up your root view model using `glu.model` since that function gives you root view model without creating a view:
-```coffeescript
+```CoffeeScript
     Given 'the Hello World application on launch', ->
       vm = null
       Meaning -> vm = glu.model 'helloworld.main'
@@ -113,10 +113,10 @@ Most of the time, you are also going to be setting up a simulated "back end" so 
 
 Lastly, you may want to advance the application to a beginning state by initializing the view model and answering the Ajax calls it makes on initialization. For instance, if the Hello World app needs to get a roster of other people who are also logged in, you might want to advance to that point:
 
-```coffeescript
+```CoffeeScript
     Given 'the Hello World application on launch', ->
       vm = null, backend
-      Meaning -> 
+      Meaning ->
         vm = glu.model 'helloworld.main'
         backend = helloworld.createMockBackend() //a function we define ourselves elsewhere
         vm.init() //internally makes a call to the 'roster' url
@@ -125,11 +125,11 @@ Lastly, you may want to advance the application to a beginning state by initiali
 
 ####User actions
 
-User actions are the simplest because they emerge naturally out of what you've defined on the view model. We earily introduced the concept of "interesting" interactions. Another way of looking at that is to ask if it is something you would want to introduce as a step in a manual test. If so, it is "interesting" and belongs in the view model as a public command or property.
+User actions are the simplest because they emerge naturally out of what you've defined on the view model. We earlier introduced the concept of "interesting" interactions. Another way of looking at that is to ask if it is something you would want to introduce as a step in a manual test. If so, it is "interesting" and belongs in the view model as a public command or property.
 
 Here's a concrete example using the helloworld example:
 
-```coffeescript
+```CoffeeScript
 Given 'the Hello World application on launch', ->
   #...Given block stuff...
     When 'the user toggles their status', ->
@@ -140,7 +140,7 @@ Since we know that all bindings are "simple" (have no logic) we know that toggli
 
 If it is a user command, we just invoke the function (just as the button would).
 
-```coffeescript
+```CoffeeScript
 Given 'the Hello World application on launch', ->
   #...Given block stuff...
     When 'the user executes the "do it" command', ->
@@ -149,7 +149,7 @@ Given 'the Hello World application on launch', ->
 
 If it is a text or value field of some sort, we just set the value:
 
-```coffeescript
+```CoffeeScript
 Given 'the Hello World application on launch', ->
   #...Given block stuff...
     When 'the user changes the personalized welcome to "foo"', ->
@@ -158,7 +158,7 @@ Given 'the Hello World application on launch', ->
 
 If it is selecting a row in a grid, we just find the one we want from the store and set it:
 
-```coffeescript
+```CoffeeScript
 Given 'the Hello World application on launch', ->
   #...Given block stuff...
     When 'the user selects a person in the roster', ->
@@ -167,7 +167,7 @@ Given 'the Hello World application on launch', ->
 ```
 
 If it is responding to a dialog there's a special method off of the confirm method called `respondWith`:
-```coffeescript
+```CoffeeScript
     When 'the user confirms the delete action', ->
       Meaning -> vm.confirm.respondWith('yes')
 ```
@@ -178,9 +178,9 @@ Note that we should never set a formula or invoke anything directly that isn't b
 
 We have also experimented with "view-inclusive" testing, but that makes things more difficult.
 
-We know that we don't want to render the DOM during normal cycles(too slow and difficult to control), but that still leaves us two options. First, we could just let GluJS bind the ExtJS object tree but not render it. That's simple (coffeescript):
+We know that we don't want to render the DOM during normal cycles(too slow and difficult to control), but that still leaves us two options. First, we could just let GluJS bind the ExtJS object tree but not render it. That's simple (CoffeeScript):
 
-```coffeescript
+```CoffeeScript
     var vm = glu.model ('helloworld.main')
     var view = glu.view vm
 ```
@@ -193,7 +193,7 @@ Unfortunately, many ExtJS controls assume that they are rendered before you can 
 
 The second remaining option is simulating the DOM within a javascript engine like Node.js. While entirely possible, that becomes a more complicated process all around and defeats the GluJS simplicity of a single developer being able to immediately produce and run testable code without additional installs or environment setups.
 
-Since the views are behaviorless within GluJS and everything "interesting" (custom) goes into the view model, testing the view models is a simple and sufficient way to provide excellent coverage. 
+Since the views are behavior-less within GluJS and everything "interesting" (custom) goes into the view model, testing the view models is a simple and sufficient way to provide excellent coverage.
 
 If you're still interested in "headless ExtJS controls" and perhaps a quick "binding validation check", let us know since we're considering addressing those points in the future.
 
@@ -201,7 +201,7 @@ If you're still interested in "headless ExtJS controls" and perhaps a quick "bin
 
 Jasmine already has excellent support for manually controlling the clock to handle background tasks. Here's an example of advancing the clock in the hello world application:
 
-```coffeescript
+```CoffeeScript
   Given 'the Hello World application on launch', ->
     vm = null, backend
     Meaning ->
@@ -222,7 +222,7 @@ You will typically have a different route for each type of service call and name
 
 For example, let's say that the 'add to group' operation triggers a single 'add to group' service which when finished triggers a grid refresh. Simulating that might look like the following:
 
-```coffeescript
+```CoffeeScript
   #...Given setup here...
   When 'the user executes the "add to group" command', ->
   Meaning -> vm.addToGroup()
@@ -241,14 +241,14 @@ At this point, we are successfully *simulating* the application (which is nice) 
 
 An example:
 
-```coffeescript
+```CoffeeScript
 Given 'the Hello World application on launch', ->
   vm = null
     Meaning -> vm = glu.model 'helloworld.main'
     ShouldHave 'set the message to "Hello World!"', -> (expect vm.shoutOut).toBe 'Hello World!'
     When 'the user toggles their status', ->
     Meaning -> vm.set 'isLeaving', true
-       ShouldHave 'set the message to "Goodbye World!"', -> (expect vm.shoutOut).toBe 'Goodbye World!'    
+       ShouldHave 'set the message to "Goodbye World!"', -> (expect vm.shoutOut).toBe 'Goodbye World!'
 ```
 
 `ShouldHave` blocks assert expectations about the result of the store step - what *should have* happened or what the UI now *should have*. It is an alias on the Jasmine `expect` function, though we prefer to use `ShouldHave` as it keeps writing all of our expectation sentences consistently. The ShouldHave function receives two arguments - the expectation in plain English, and then a function that contains one or more *expectations*, also known as *assertions*.
@@ -261,7 +261,7 @@ One of the most commonly used helper functions when simulating Ajax is `backend.
 
 For example, let's flesh out the example given above with the actual expectations. We're not only going to respond to the calls, we're going to assert that they were made in the first place:
 
-```coffeescript
+```CoffeeScript
   #...Given setup here...
   When 'the user executes the "add to group" command', ->
   Meaning -> vm.addToGroup()

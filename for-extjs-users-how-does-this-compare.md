@@ -52,7 +52,7 @@ Ext.define('Helloworld.controller.Main', {
                 toggle : this.onButtonChange
             }
         });
-    },    
+    },
     onButtonChange: function(button, state) {
         var msg = this.state ? 'Goodbye World!' : 'Hello World!';
         this.getMainPanel().setTitle(msg); //now getting a reference through the component query defined in refs
@@ -61,7 +61,7 @@ Ext.define('Helloworld.controller.Main', {
 //VIEW FILE
 Ext.define('Helloworld.view.Main', {
     extend: 'Ext.panel.Panel',
-    alias: 'main',    
+    alias: 'main',
     initComponent: function() {
         this.tbar = {
             xtype: 'tbar',
@@ -69,17 +69,17 @@ Ext.define('Helloworld.view.Main', {
                 itemId : 'exitToggle',
                 text : 'Coming/Going' //we let the controller wire up the toggle handler
             }]
-        };        
+        };
         this.callParent();
     }
 });
 //VIEWPORT FILE
 Ext.define('Helloworld.view.Viewport', {
     extend: 'Ext.container.Viewport',
-    layout: 'fit',    
+    layout: 'fit',
     requires: [
         'Helloworld.view.Main'
-    ],    
+    ],
     initComponent: function() {
         this.items = [{
             xtype: 'main'
@@ -88,15 +88,15 @@ Ext.define('Helloworld.view.Viewport', {
 });
 //APPLICATION BOOTSTRAP FILE
 Ext.application({
-    name: 'Helloworld',    
+    name: 'Helloworld',
     autoCreateViewport: true,
     controllers: ['Main']
 });
 ```
 
-This is definitely an organizational improvement. Following a MVC pattern at least puts the code into separate code files, and now the application will have some basic lines. But it does this *at the expense of much more code* (even ignoring the viewport and application bootstrap for now and just considering the view and controller).
+This is definitely an organizational improvement. Following a MVC pattern at least puts the code into separate code files, and now the application will have some basic lines. But it does this *at the expense of much more code* (even ignoring the `Viewport` and application bootstrap for now and just considering the view and controller).
 
-In effect, all we've done is externalized how component event handlers and references back to other components are "wired". Now that we have split them apart, we have *even more work* than before in writing "component queries" to bring them back together again. We could call the pattern MVCRCQ - a model, view, controller, references, and component queries, because without refs and component queries for each and every bit of "wiring", the MVC pattern won't work.
+In effect, all we've done is externalized how component event handlers and references back to other components are "wired". Now that we have split them apart, we have *even more work* than before in writing "component queries" to bring them back together again. We could call the pattern MVCRCQ - a model, view, controller, references, and component queries, because without `refs` and component queries for each and every bit of "wiring", the MVC pattern won't work.
 
 Because the view and controller still need to be manually "wired up", there has been little real actual separation at an architectural level:
  * The app is still "brittle": the references and component queries mean your controllers have to know how to find items in your view tree.
@@ -128,7 +128,7 @@ glu.defView('helloworld.main',{
     title: '@{message}',
     tbar : [{
         text : '~~arrivalStatus~~',
-        pressed : '@{arriving}'            
+        pressed : '@{arriving}'
     }]
 });
 //ExtJS application bootstrap

@@ -48,7 +48,7 @@ Many properties support one-way binding (model to control). If the control has a
 
 When their is a mismatch in naming between configuration property and the method on the control, that is no cause to worry. GluJS contains binding *adapters* for each component that take care of the mismatch and call the appropriate control method for you (if such a method is available - a few configuration properties really can't be easily changed after initialization).
 
-Controls in turn may update one or more properties they are bound to. Controls derived from *field* for instance always have a way to update their `value` property. Whenever this is the case (and you haven't otherwise indicated in a binding directive), GluJS will automatically also bind from control -> view model. That means whenever the value of the control changes, the matching property on the view model will be updated. This is done through that control's GluJS binding adapter, which listens on an appropriate event emitted by the control and updates the matching view model proprety accordingly.
+Controls in turn may update one or more properties they are bound to. Controls derived from *field* for instance always have a way to update their `value` property. Whenever this is the case (and you haven't otherwise indicated in a binding directive), GluJS will automatically also bind from control -> view model. That means whenever the value of the control changes, the matching property on the view model will be updated. This is done through that control's GluJS binding adapter, which listens on an appropriate event emitted by the control and updates the matching view model property accordingly.
 
 Control config properties that are available for two-way binding per control are documented in the binding adapter API documentation.
 
@@ -75,7 +75,7 @@ glu.defView('helloworld.main',{
 
 This will make the `cls` change from 'button-arriving-true' to 'button-arriving-false' dynamically (and the GluJS component adapter will set the css class accordingly).
 
-The preferred option is to make the formula explicit in the view model, but this on occasion makes more sense (when there are many of them or when writing a transformer). And of course when the strings are meant to be read, the preferred option is to use the localization facility instead so no text is hard-coded and unlocalizable.
+The preferred option is to make the formula explicit in the view model, but this on occasion makes more sense (when there are many of them or when writing a transformer). And of course when the strings are meant to be read, the preferred option is to use the localization facility instead so no text is hard-coded and non-localizable.
 
 ###Binding commands
 
@@ -121,7 +121,7 @@ In the preceding example, `archiveAsset` is a typical  "two-step" action in whic
 
 Yet sometimes you have a command that only makes sense with a parameter. For instance, the `openAsset` command *selects and invokes* in a single operation; the user can arbitrarily double-click on any row and intend 'open *this one*'. There is no way for the `openAsset` command to rely on a previous state.
 
-In otherwords, the event/command itself is inherently *parameterized*. In those cases, GluJS has a convenient built-in shortcut. ExtJS events that are inherently parameterized always pass in the data target as the second (or later) parameter. GluJS simply passes in every argument but the first into your command (in the case of `itemdblclick` it passes in the `Ext.data.Model` you just double-clicked). That's why the `openAsset` in the example will get the `model` reference it is requesting in its signature.
+In other words, the event/command itself is inherently *parameterized*. In those cases, GluJS has a convenient built-in shortcut. ExtJS events that are inherently parameterized always pass in the data target as the second (or later) parameter. GluJS simply passes in every argument but the first into your command (in the case of `itemdblclick` it passes in the `Ext.data.Model` you just double-clicked). That's why the `openAsset` in the example will get the `model` reference it is requesting in its signature.
 
 Another case for parameterization is when you have multiple buttons logically pointing to the same command, each with slightly different options. Rather than creating a unique command function for each, it makes sense to switch out the options as parameters.
 
@@ -167,7 +167,7 @@ Static views are usually not all there is in a reactive application. In fact, a 
 
 ExtJS has some support for this. The most obvious example is the grid, which renders each item (a record or model) in a list (store) - but you have to use grid columns or your own HTML renderers and not ExtJS controls, and it is assumed that all rows are the same. A less-commonly used option is the `DataView`. It is much the same as a grid, but instead of the template being a set of ExtJS components (as one would expect), it is instead a raw HTML `xtemplate` that you supply and again assumes similar rows. Furthermore, since the appeal of a widget set like ExtJS is that you *are not having to write* cross-browser HTML, using the `DataView` can be frustrating and counter-intuitive.
 
-ExtJS also supports normal `container` structures like tabs, accordion layouts, menus, etc. which *do* let you put a variety of items inside them. However, these don't let you bind what they contain to a store. You must manually create and maintain the appropriate child components. This is obviously redundant and repetitive for grids and dataviews; it is equally redundant and repetitive here.
+ExtJS also supports normal `container` structures like tabs, accordion layouts, menus, etc. which *do* let you put a variety of items inside them. However, these don't let you bind what they contain to a store. You must manually create and maintain the appropriate child components. This is obviously redundant and repetitive for `grid`s and `dataview`s; it is equally redundant and repetitive here.
 
 GluJS unifies the 'templated list' pattern into a single, simple concept called `container binding` or more specifically `items binding`.
 

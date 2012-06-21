@@ -1,6 +1,6 @@
 ##View: the basics
 
-The view is the final piece of the puzzline in creating rich, reactive applications.
+The view is the final piece of the puzzle of creating rich, reactive applications.
 
 For the most part, the point of GluJS is that it lets the underlying view provider - for now ExtJS - really shine. GluJS takes care of the high-friction parts - the specification and management of the behavior and enterprise glue - so that your ExtJS can be as straightforward and as uncomplicated as possible. That's good, because even straightforward ExtJS view definitions can take time to master.
 
@@ -25,11 +25,11 @@ glu.defineView('helloworld.personSet',{
 });
 ```
 
-You can nest ExtJS components within your view as much as you want. The *binding context* of the view will remain the matching view model no matter how deep you go. So you can have a rich view with many nested compenents bound to a flat view model if that suits your application.
+You can nest ExtJS components within your view as much as you want. The *binding context* of the view will remain the matching view model no matter how deep you go. So you can have a rich view with many nested components bound to a flat view model if that suits your application.
 
 Views can also be using a *factory* pattern when using *layouts* (discussed below).
 
-####Includes (quick xtypes)
+####Includes (quick xtype)
 
 Sometimes you want to separate a large view up into smaller parts for easier management, even if the view as a whole is simply bound to a single view model.
 
@@ -57,9 +57,9 @@ This just "inlines" the declarative JSON into the parent view - simple.
 
 As we saw earlier, views are "materialized' automatically by GluJS. You define them, but you don't manipulate them in any way. Instead, they are created and inserted for you.
 
-You begin by using one of two glu components : `glu.viewport` and `glupanel`. The former creates an ExtJS viewport for you, while the latter is an `xtype` usable anywhere within an ExtJS application.
+You begin by using one of two glu components : `glu.viewport` and `glupanel`. The former creates an ExtJS `Viewport` for you, while the latter is an `xtype` usable anywhere within an ExtJS application.
 
-In either case, by using on of them you will be specifying the *root view model* (available as `this.root` from all child view models). Both will materialize the matching root view in the appropriate spot; the first as the viewport of the entire web window, the second wherever you place the panel in a non-glu application.
+In either case, by using on of them you will be specifying the *root view model* (available as `this.root` from all child view models). Both will materialize the matching root view in the appropriate spot; the first as the `Viewport` of the entire web window, the second wherever you place the panel in a non-glu application.
 
 From there, other views are brought in as appropriate, either as a nested view or as a container-bound view.
 
@@ -290,7 +290,7 @@ This organization by view model effectively and naturally 'namespaces' your loca
 
 ####Substitutions (parameterized localization)
 
-Simple text is not always enough - sometimes you need to localize a phrase with arbitrary value substitutions in the middle. You can't simply concatenate in your view model because different languages will order things differently. For that, gluJS supports `string format` like functionality.
+Simple text is not always enough - sometimes you need to localize a phrase with arbitrary value substitutions in the middle. You can't simply concatenate in your view model because different languages will order things differently. For that, gluJS supports `string format`-like functionality.
 
 When localizing from a view model, along with the key you can pass in values that the key will use in rendering the text. If you want to make sure you can pass in the first name on the message, just do this:
 
@@ -328,7 +328,7 @@ glu.assets.locale = {
 }
 ```
 
-Will work even if you don't provide the key, assuming `assetSelections` is an array property on the view model. Keep in mind that this is probably not the best way to organize things because it forces your locale keys to be somewhat "viewmodel-aware" but is provided as an option for corner-cases.
+Will work even if you don't provide the key, assuming `assetSelections` is an array property on the view model. Keep in mind that this is probably not the best way to organize things because it forces your locale keys to be somewhat "view model-aware" but is provided as an option for corner-cases.
 
 ####Custom localizer
 

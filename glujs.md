@@ -8,8 +8,8 @@ The bar of user experience has been raised. You can no longer deliver a web appl
  * Action buttons that enable and disable immediately based on the state of your application and what is selected. For instance, a save button that becomes enabled as soon as a form is "dirty", and then is disabled when not.
  * Areas of a form that enable or expand immediately based on a checkbox being activated or a configuration across multiple fields detected. For instance, a parent configuration checkbox that controls access to dependent options, or a scheduler that changes your choices based on what sort of recurrence you've set.
  * A detail panel that slides in an out based on whether anything is selected
- * Tabs that are automatically selected based on the result of actions. For instance, certain actions may cause a panel to slide out with the relevant tab pre-selected. 
- * An options box that controls validation threshholds for other screens of the app. When changed, any affected screen calculations need to be updated.
+ * Tabs that are automatically selected based on the result of actions. For instance, certain actions may cause a panel to slide out with the relevant tab pre-selected.
+ * An options box that controls validation thresholds for other screens of the app. When changed, any affected screen calculations need to be updated.
  * Calculated fields based on the values of other fields that need to be immediately updated when any of the source fields change.
  * A detail panel that dynamically changes what it displays based on the type and number of rows selected. For instance, it may show a customized truck panel for a truck asset versus a computer asset, or an aggregate chart if multiple items are selected.
 
@@ -56,7 +56,7 @@ All of this adds up to a painfully slow development cycle in which getting to a 
 GluJS directly addresses the needs of enterprise developers:
 
 ####Test-first out-of-the box
-GluJS provides a test specification methodology (backed by Jasmine) that captures and turn complex UI behavior provided by stakeholders into actionable code and automated tests. To make sure that the tests correspond to user stories in the real world, GluJS provides a test library that provides full transparent AJAX mocking and dummy data. 
+GluJS provides a test specification methodology (backed by Jasmine) that captures and turn complex UI behavior provided by stakeholders into actionable code and automated tests. To make sure that the tests correspond to user stories in the real world, GluJS provides a test library that provides full transparent AJAX mocking and dummy data.
 
 ####Fast UI cycles even if the server-side is incomplete
 Client developers no longer have to wait to get back to the stakeholders. A rich, simple Ajax back-end simulator lets you jump immediately into producing tested UI code. It also lets developers return the client application back to stakeholders for feedback and review -- perhaps before the actual server is even started. Pointing back to an actual server is later a single configuration switch.

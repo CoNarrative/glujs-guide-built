@@ -65,7 +65,7 @@ var vm = this.model({
 );
 ```
 
-A 'root' view model can be instantiated by one of several entry points, but most typically by leveraging the glu viewport factory within the ExtJS entry-point:
+A 'root' view model can be instantiated by one of several entry points, but most typically by leveraging the glu `viewport` factory within the ExtJS entry-point:
 
 ```javascript
 Ext.onReady(function(){glu.viewport('example.main');});
@@ -82,7 +82,7 @@ Ext.onReady(function(){
 });
 ```
 
-or it can be included as a subpanel of an already existing application panel:
+or it can be included as a sub-panel of an already existing application panel:
 
 ```javascript
 //...
@@ -102,13 +102,13 @@ or (usually just for testing) you can start one with a fully qualified namespace
 var vm = glu.model('example.main');
 ```
 
-### Submodels / child view models
+### Sub-models / child view models
 
 GluJS is a framework for quickly developing real applications with complex navigation and screens. Very often you'll want to split your
 view models in parts. The initial example above has a list of 'student' view models. This list could correspond on the screen to
 a set of items in a mobile list or a set of tabs. This is just one of the built-in UI composition patterns within GluJS.
 
-Submodels are indicated by using the `mtype` property within a nested object.
+Sub-models are indicated by using the `mtype` property within a nested object.
 
 Note that you *do not* have to divide your view model up just because your screen has logical areas. It can often remain relatively flat if the interactions are simple enough. For instance, you may have a form with multiple tabs representing different parts of a large data object. You can keep it as one large flat data object, and just break it up at the view level.
 
@@ -152,12 +152,12 @@ glu.defModel ('assets.main',{
 });
 ```
 
-If a tabpanel's `items` collection is bound to the screenList, it will automatically construct the matching tab for that type of view model. Conversely, when the view model is removed from the list, so is the tab from the tabpanel. As a bonus illustration, the example also includes a cap on how many screens can be active; if there are already 8 or more screens open, openScreen will be disabled until enough are closed.
+If a `tabpanel`'s `items` collection is bound to the screenList, it will automatically construct the matching tab for that type of view model. Conversely, when the view model is removed from the list, so is the tab from the `tabpanel`. As a bonus illustration, the example also includes a cap on how many screens can be active; if there are already 8 or more screens open, openScreen will be disabled until enough are closed.
 
 ### The view model graph
 
 When you create child view models, those are automatically parented as follows:
- * `this.parentVM` - the child is given a reference to the parent view model. If the child is part of a `list`, the parentVM is the parent of the list, not the list itself. Note that this can change if the view model is 'reparented'.
+ * `this.parentVM` - the child is given a reference to the parent view model. If the child is part of a `list`, the parentVM is the parent of the list, not the list itself. Note that this can change if the view model is 're-parented'.
  * `this.parentList` - the parent list of a child in the list. This too can change based on what list the child is added to.
  * `this.root` - the root view model. The root of the entire view model tree. This is immutable and is simply the "initial entry point". In other words, it constitutes the "application" as far as glu is concerned. That does not preclude you from having multiple application roots within a single page (such as different modules in a larger non-glu application).
 
@@ -214,7 +214,7 @@ This approach avoids class definition trees and keeps things simple.
 There are a number of convenience methods that are commonly used within a view model. Use them
 instead of the matching ones on the 'glu' object because they
   *    pass in the local namespace
-  *    set the scope of any callback to the viewmodel (so 'this' always refers to the view model)
+  *    set the scope of any callback to the view model (so 'this' always refers to the view model)
   *    automatically create parent/child associations where appropriate
   *    are automatically mocked as needed by the simulation/testing framework just on that view model without breaking core 'glu' for other view models.
 
@@ -231,7 +231,7 @@ The methods are as follows (please refer to the API docs for details):
 
 There are three ways to open up a dialog to the user.
 
-First, if it is simply a message box, then use the built in `this.message` on the view model. It is (for now) simply an alias on to the ExtJS MessageBox functionality that scopes the callback to the viewmodel.
+First, if it is simply a message box, then use the built in `this.message` on the view model. It is (for now) simply an alias on to the ExtJS MessageBox functionality that scopes the callback to the view model.
 
 ```javascript
     //...in view model definition

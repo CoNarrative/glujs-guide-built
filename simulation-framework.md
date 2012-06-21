@@ -73,9 +73,9 @@ The call to an Ajax request is asynchronous (as expected) and so nothing else ha
 
 You control when the simulate Ajax call returns by the `respondTo` method. You can provide a custom one-time response when you call the function; this is especially useful when simulating errors.
 
-For example (in coffeescript):
+For example (in CoffeeScript):
 
-```coffeescript
+```CoffeeScript
   #...Given setup here...
   When 'the user executes the "add to group" command', ->
   Meaning -> vm.addToGroup()
@@ -84,7 +84,7 @@ For example (in coffeescript):
 ```
 
 In addition to supplying the HTTP `status` code (default 200) and `responseText`, you can also return HTTP headers in a `headers` object as needed:
-```coffeescript
+```CoffeeScript
       Meaning -> backend.respondTo 'addGroup', {
           responseText : '{id:1}',
           headers : {
@@ -94,19 +94,19 @@ In addition to supplying the HTTP `status` code (default 200) and `responseText`
 
 As a convenience, you can also return a `responseObj` instead of a `responseText`. This will (as you might guess), simply serialize the provided object into the responseText:
 
-```coffeescript
+```CoffeeScript
       Meaning -> backend.respondTo 'addGroup', {
           responseObj : {id:1}
         }
 ```
 
-And because more often than not you will be returing a successful response instead of a failure, there's a final shortcut in which you simply provide the responseObj itself (equivalent to the previous example):
+And because more often than not you will be returning a successful response instead of a failure, there's a final shortcut in which you simply provide the responseObj itself (equivalent to the previous example):
 
-```coffeescript
+```CoffeeScript
       Meaning -> backend.respondTo 'addGroup', {id:1}
 ```
 
-Race conditions are easily catchable because now you can spell out the exact order of the Ajax return calls. If you are having trouble isolating a race condition, simply have the Ajax calls return in various orders until you have isolated it. Now that can become a permanent test case to not only help you fix and test, but also prevent a regression in the future.
+Race conditions can be more easily caught because now you can spell out the exact order of the Ajax return calls. If you are having trouble isolating a race condition, simply have the Ajax calls return in various orders until you have isolated it. Now that can become a permanent test case to not only help you fix and test, but also prevent a regression in the future.
 
 ####Live demo / user training mode
 
@@ -169,7 +169,7 @@ The database is one-table at a time for now. Anything more complex (involving jo
 
 You can lean on the fake data API which will provide fake data based on an analysis of the names of the fields, their data types, and their constraints. Often you won't be using it directly but simply relying on the GluJS data layer to create it for you when you make a sample table. See the API for more details.
 
-Building out the ease and sophistication of the ajax and data frameworks is one of our top priorites on the GluJS roadmap and we are greatly interested in your feedback.
+Building out the ease and sophistication of the ajax and data frameworks is one of our top priorities on the GluJS roadmap and we are greatly interested in your feedback.
 
 
 *Copyright 2012 Mike Gai. All rights reserved.*

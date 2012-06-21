@@ -1,9 +1,9 @@
 ##The Basic SVVM Pattern
-GluJS is a refined variant of the MVVM (model-view-viewmodel) pattern that we call SVVM. That's short for specification-view-viewmodel.
+GluJS is a refined variant of the MVVM (Model-View-View Model) pattern that we call SVVM. That's short for Specification-View-View Model.
 
 The switch to SVVM underscores two points. First it underscores one of the main points of GluJS: making it dead simple to drop right into test-first development based on user stories or specifications. In fact, we recommend (and make it simple) to always start with a specification.
 
-The second is that the architecture is simpler than it looks. Essentially, there are 
+The second is that the architecture is simpler than it looks. Essentially, there are
  * specs -        descriptions of what the app is supposed to do that are also fully functional tests
  * view models -  descriptions of screen states and rules that include data
  * views -        declarative JSON that describes the component tree (similar to MXML or XAML from Flex and WPF/Silverlight)
@@ -48,9 +48,9 @@ We recommend capturing your user stories as much as possible in this format. The
 
 ####The specification in code
 
-Here is that same (first) example given in coffescript:
+Here is that same (first) example given in CoffeeScript:
 
-```coffeescript
+```CoffeeScript
 Given 'the Hello World application on launch', ->
   vm = null
   Meaning -> vm = glu.model 'helloworld.main'
@@ -60,7 +60,7 @@ Given 'the Hello World application on launch', ->
     ShouldHave 'set the message to "Goodbye World!"', -> (expect vm.shoutOut).toBe 'Goodbye World!'
 ```
 
-We use coffeescript (for the specifications only) because it makes them so short and expressive that they match up very closely with the plain English specification provided by the analyst. Here's the same thing in javascript if you prefer that:
+We use CoffeeScript (for the specifications only) because it makes them so short and expressive that they match up very closely with the plain English specification provided by the analyst. Here's the same thing in javascript if you prefer that:
 ```javascript
     Given ('the Hello World application on launch', function() {
         var vm;
@@ -95,7 +95,7 @@ A view model is a "state machine" that tracks anything "interesting" going on in
  * calculations (the same again)
  * Ajax calls to a "back-end"
 
-It does *not* include "uninteresting" things that are part of standard out-of-the-box control behavior. For instance, whether a combo-box is expanded or not is usually based entirely on existing standard conventions and handled internally by the control. 
+It does *not* include "uninteresting" things that are part of standard out-of-the-box control behavior. For instance, whether a combo-box is expanded or not is usually based entirely on existing standard conventions and handled internally by the control.
 
 The moment that behavior has additional app-specific logic, it becomes part of the view model. For instance, if the expanded/collapsed state of the combo box is supposed to be auto-expanded whenever a value of 'Other' is input into another combo-box, then that logic needs to be put into the view model as it is not provided "out of the box".
 
@@ -112,7 +112,7 @@ glu.defModel('helloworld.main',{
 
 The view model has a single property and a single formula. A property is simply what you'd expect - a value that you change by calling `.set('arriving')` on the view model. It raises event notifications whenever it changes value.
 
-A formula is a special sort of property that is not changed by calling `.set`, but instead re-caclulates whenever referenced values change, much like a spreadsheet cell that points to other cells. In the case above, the value of `message` will be changed if and only if the value of 'arriving' changes. A property is marked as a formula simply by appending a `$` to it and then providing a function that returns a value. The GluJS framework will analyze the funciton and "wire it up" accordingly.
+A formula is a special sort of property that is not changed by calling `.set`, but instead re-calculates whenever referenced values change, much like a spreadsheet cell that points to other cells. In the case above, the value of `message` will be changed if and only if the value of 'arriving' changes. A property is marked as a formula simply by appending a `$` to it and then providing a function that returns a value. The GluJS framework will analyze the function and "wire it up" accordingly.
 
 This view model above will start with an `arriving` of true and a `message` of 'Hello World'. If you change the value of arriving by calling `.set('arriving', false)`, `message` will change to 'Goodbye World!'.
 
@@ -132,7 +132,7 @@ glu.defView('helloworld.main',{
     title: '@{message}',
     tbar : [{
         text : '~~arrivalStatus~~',
-        pressed : '@{arriving}'            
+        pressed : '@{arriving}'
     }]
 });
 ```
@@ -171,20 +171,20 @@ To sump up, what the binding pattern provides is an extremely simple way to deal
 
 In addition to the simplicity of binding, GluJS also provides a very straightforward way to "compose" your views dynamically that include "config transformations", localization, one-to-many tab patterns, dynamic areas of the screen, pop-up messages and dialogs, layouts, and more. Furthermore, there is a strong "name convention" piece to GluJS we have not yet introduced that makes your bindings even simpler and more consistent. These will be covered in a later more detailed section.
 
-###Example flow between viewmodel and view
+###Example flow between view model and view
 
 The binding built within GluJS is very simple to use, but lets you quickly compose sophisticated interaction patterns. In the running 'Hello World' example, the flow between view and view model can be summarized as follows:
  1. The button starts out toggled because `arriving` starts out `true`, and the `title` of the panel starts out as 'Hello World!' because `message` (which is calculated from the value of `arriving`) is that value.
  3. When clicked, GluJS sets `arriving` to `false`
- 4. That in turn triggers the view model formula called `message` to recalculate based on the provided formula funciton. It now has the value 'Goodbye World!'
+ 4. That in turn triggers the view model formula called `message` to recalculate based on the provided formula function. It now has the value 'Goodbye World!'
  5. Since the `title` is bound to `message`, GluJS automatically updates the title to match
 
-It's a simple but very powerful pattern. If you are familiar with ExtJS (and even if you are not) it will be useful to walk through the [For ExtJS users: How does this compare?](for-extjs-users-how-does-this-compare.md#for-extjs-users-how-does-this-compare) section below to see how it compares against "straight-ahead" and "MVC" aproaches on even a simple reactive application.
+It's a simple but very powerful pattern. If you are familiar with ExtJS (and even if you are not) it will be useful to walk through the [For ExtJS users: How does this compare?](for-extjs-users-how-does-this-compare.md#for-extjs-users-how-does-this-compare) section below to see how it compares against "straight-ahead" and "MVC" approaches on even a simple reactive application.
 
 ###Basic entry points
 
 We have defined the application, but not yet instantiated it anywhere. To do that, GluJS supports two basic entry points.
-First is the viewport entry-point when you are using GluJS globally within your ExtJS application:
+First is the `Viewport` entry-point when you are using GluJS globally within your ExtJS application:
 
 ```javascript
 Ext.onReady(function(){glu.viewport('helloworld.main')};);
@@ -192,19 +192,19 @@ Ext.onReady(function(){glu.viewport('helloworld.main')};);
 
 That will locate the `main` view model (defined earlier), find the matching view, and then take over the full page to display the application.
 
-Often within an enterprise you don't have control over the full application and are instead just one module in a bigger framework. To accomodate that within ExtJS, we provide the `glupanel`. Anywhere you can drop a normal ExtJS `panel`, you can drop a `glupanel` and supply what GluJS needs to get started:
+Often within an enterprise you don't have control over the full application and are instead just one module in a bigger framework. To accommodate that within ExtJS, we provide the `glupanel`. Anywhere you can drop a normal ExtJS `panel`, you can drop a `glupanel` and supply what GluJS needs to get started:
 
 ```javascript
 //within a ExtJS component definition:
 items : [{
     xtype : 'glupanel',
     viewmodelConfig : {
-        mtype : 'helloworld.main'  
+        mtype : 'helloworld.main'
     }
 }
 ```
 
-The property `viewmodelConfig` lets you pass in a configuration block in case the parent application needs to hand in initialization parameters into your view model (that's why the alternate object with `mtype` property is used here). You can have as many glupanels as you need in your application and each will be a 'glu root' independent of the others.
+The property `viewmodelConfig` lets you pass in a configuration block in case the parent application needs to hand in initialization parameters into your view model (that's why the alternate object with `mtype` property is used here). You can have as many `glupanel`s as you need in your application and each will be a 'glu root' independent of the others.
 
 It's really that simple. For more information on how that compared with what we are used to doing in ExtJS, continue on to the next section.
 

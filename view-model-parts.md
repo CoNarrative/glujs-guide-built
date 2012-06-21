@@ -10,13 +10,17 @@ The view model is composed of several distinct parts that represent your applica
 
   *    *Properties* - Hold states that various parts of the screen can be in. Usually correspond to things that the user can set
        (like the contents of a text field, or the currently active tab, or which rows of a grid are selected).
+
   *    *Formulas* - Calculated properties that respond to changes in properties or other formulas. By their nature, they are
        read-only so they typically represent the app 'responding' to user interaction. Glu will analyze the formula and keep it
        updated when input properties change.
-  *    *Submodels* - Contains various subscreens and lists of subscreens (glu is for full applications so view models are always
+
+  *    *Sub-models* - Contains various sub-screens and lists of sub-screens (glu is for full applications so view models are always
        in a hierarchy with a single root). There is also a special 'parentVM' property to find any view model's container.
+
   *    *Commands* - Actions that the user can take that aren't represented by simple properties. For instance, a save button or
        hitting the 'close window' indicator.
+
   *    *Reactors* - Rules that are triggered on property / formula changes so you don't have to put all of your side-effects
        into the property setter. For instance, refreshing the grid when any of several filters change. A formula is really a
        special type of reactor where the action is setting a single property; if it's more complicated, use a reactor.
@@ -90,7 +94,7 @@ is not strictly necessary. It is a matter of preference whether you access the p
 get ('foo')
 ```
 
-to keep the `get` behavior encapsulated within the viewmodel.
+to keep the `get` behavior encapsulated within the view model.
 
 To change `get`/`set` behavior (not usually recommended), you can manually add `get`/`set` overrides by using the convention:
 
@@ -103,7 +107,7 @@ setFoo : function(value) {
 
 Calls to `get()` and `set()` will honor these overrides.
 
-In the future, we may provide either automatic getter/setters [`getFoo()` / `setFoo('value')`] and/or Knockout-style getters/setters [`foo()`/`foo('value')`] if there is demand (we have experimented with both)
+In the future, we may provide either automatic getter/setters (`getFoo()` / `setFoo('value')`) and/or Knockout-style getters/setters (`foo()`/`foo('value')`) if there is demand; we have experimented with both and haven't seen a lot of extra value with either though.
 
 ####Serialization (data)
 
@@ -138,9 +142,9 @@ The `commit` function lets you set the current values as the new "original" valu
 
 With this pattern, your data does not have to be arbitrarily separated into a pure 'model' with no behavior. After all, if you are building a UI you are going to be displaying that data on the screen, and you're going to need all the rich reactive behavior GluJS provides. The view model concept unifies model with controller and makes your architecture a whole lot simpler - and you can still separate out your "data definitions" (models) for re-use by leveraging `modelType` as needed.
 
-### Formulas
+### Formula Properties
 
-Formulas are read-only properties that respond to changes in other properties. To declare a formula, put a `$` at
+Formula properties (or just formulas for short) are read-only properties that respond to changes in other properties. To declare a formula, put a `$` at
 the end of the name (this won't become part of its name but is just a flag) and then supply a function that returns
 a value:
 
@@ -151,6 +155,8 @@ saveIsEnabled$: function(){return this.isValid && this.isDirty;}
 GluJS will scan the function and find property change events to listen for and so will automatically keep up to date with a minimum of recalculation. In the example above, if (and only if) the `isValid` or `isDirty` properties change, it will update the value of `saveIsEnabled`.
 
 Formulas can also be chained: in the example above both `isValid` and `isDirty` are actually other formulas!
+
+Formulas are key to managing the reactive nature of your UI application because formulas are themselves 'reactive'. Like formula cells in a spreadsheet, they are always up to date no matter what approach or order the user takes to manipulating the UI. Extremely complex patterns and corner cases can resolve themselves "automatically" when you let formulas manage application flow, so use them whenever you can.
 
 #### IsValid
 
@@ -218,7 +224,7 @@ the section on [Binding by convention](view-binding.md#binding-by-convention)).
 The reactor pattern is simply a shortcut to managing "event observers". It's a powerful way to reduce code clutter and break
 out different UI behavior as "rules".  For certain reactive patterns, it lets you "plug in" new behavior in one spot without modifying (and possibly breaking) existing behavior.
 
-Let's say you have an application with a complex grid that needs to be refreshed when any number of text filters, switches and dials on the screen are adjusted. We're going to keep it abstract for now and just call these properties A thorugh E.
+Let's say you have an application with a complex grid that needs to be refreshed when any number of text filters, switches and dials on the screen are adjusted. We're going to keep it abstract for now and just call these properties A thorough E.
 
 A common way to do this would be to separate out the 'refresh' into a function and then have each of the setters for these trigger the refresh:
 

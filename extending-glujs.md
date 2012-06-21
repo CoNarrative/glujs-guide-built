@@ -63,7 +63,7 @@ This is a component adapter for the `Ext.button.Button` component. Here are some
  * `applyConventions` - applies conventions when gluJS detects a `name` property. Notice that the `handler` is a required binding (if you call a button 'save' there better be a 'save' command on the view model) while 'pressed' is an optional binding.
  * `pressedBindings` - provides special helpers when binding to the `pressed` component property, such as how to set the component property in response to view model changes (`setComponentProperty`) which event to respond to `toggle` and how to return the event value `eventConverter`.
 
-Whenever we come across a component property (or component) that we have yet 'gluified', we simply go into the appropriate adapter (or create a new one) and add the bindings. In other words, instead of having 'hacks' spread throughout the code to remember that you have to call 'toggle' to change the 'pressed' state of a button, we set it up one time in the adapter and then can ignore an unecessary 2/3 of the ExtJS control API (along with the other GluJS benefits).
+Whenever we come across a component property (or component) that we have yet 'gluified', we simply go into the appropriate adapter (or create a new one) and add the bindings. In other words, instead of having 'hacks' spread throughout the code to remember that you have to call 'toggle' to change the 'pressed' state of a button, we set it up one time in the adapter and then can ignore an unnecessary 2/3 of the ExtJS control API (along with the other GluJS benefits).
 
 If you have a custom control of your own, you can just make an adapter as above and register it. Even simpler, make sure you controls have a consistent `foo:value`/`setFoo()` pattern and you will minimize your need for adapters in the first place.
 
@@ -71,7 +71,7 @@ If you have a custom control of your own, you can just make an adapter as above 
 
 Ever need to create a custom control that was just a collection of controls or some simple tweaks, and ended up having to make a whole complicated ExtJS component class? Ever wanted a plugin that could change everything about the control, even including its xtype? That would be obviously impossible within ExtJS, since plugins are invoked *after* a specific component is created.
 
-What you would need is the ability to transform the configuration block itself *before* ExtJS started making components off of it. That's all a transformer is. It lets you stick with the most straightforward part of ExtJS - the configuration properties we use when setting up views - and avoid the internal complexities and limitations of subclassing a component.
+What you would need is the ability to transform the configuration block itself *before* ExtJS started making components off of it. That's all a transformer is. It lets you stick with the most straightforward part of ExtJS - the configuration properties we use when setting up views - and avoid the internal complexities and limitations of sub-classing a component.
 
 Here's an example of a plugin provided with gluJS that actually determines the xtype of a property by a set of rules *based on the data type of the property*. In other words, if the property is a date / time, you get a date time picker, a boolean becomes a checkbox, a field constrained by another becomes a combo-box, etc.
 
@@ -110,7 +110,7 @@ glu.defView ('assets.asset', {
 });
 ```
 
-Each field will *automatically* get its proper type based on its data value. When designing enterprise applications, this gives you the ability to *standardize the feel of the application* by enforcing control consistency. Want all of your booleans to be a yes/no radio button instead of a checkbox? No problem, just change the 'autofield' adapter and you can enforce the change globally throughout the application. Of course, whereever exceptions are needed, you can fall back to explicit xtypes (as shown in the 'fieldset' definition above).
+Each field will *automatically* get its proper type based on its data value. When designing enterprise applications, this gives you the ability to *standardize the feel of the application* by enforcing control consistency. Want all of your booleans to be a yes/no radio button instead of a checkbox? No problem, just change the `autofield` adapter and you can enforce the change globally throughout the application. Of course, wherever exceptions are needed, you can fall back to explicit `xtype`s (as shown in the `fieldset` definition above).
 
 Perhaps you know the xtype, but you would like to transform it based on a pattern. For instance, suppose you had a notion of "change tracking" in a field in which you needed to see the original value of the control laid out in a display field next to the current value. Since this is a fundamental change in each field, you might be tempted to make a new type of control per field type ('changeawareradiobutton', 'changeawaretextfield', etc.), or make a special type of container that throws out the controls you add to it and rebuilds the structure. But not only would that be a great deal of custom work, you couldn't quickly change back to contexts in which you *didn't* need that capability. In short, you don't have many good options.
 
