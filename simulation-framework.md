@@ -63,7 +63,9 @@ glu.ns('assets').createMockBackend = function(liveMode) {
 }
 ```
 
-The url is a simple pattern containing url (REST) parameters to capture. These captured parameters show up in the `params` collection, as well as any key-value pairs from the query-string (make sure there is no overlap).
+The `routes` property is the most important. It consists of one or more named 'back-end service' definitions (or *routes*) that mimic a back-end web interface.
+
+The URL for each route is a simple pattern containing url (REST) parameters to capture. These captured parameters show up in the `params` collection, as well as any key-value pairs from the query-string (make sure there is no overlap).
 
 After the call to `.capture`, whenever a call is made to the view provider's (e.g. ExtJS) Ajax library it will first attempt a match against one of the provided routes. If there is a match, it will store the request in the route's request queue.
 

@@ -35,8 +35,8 @@ glu.model({
    status : 'OK',
 
    //FORMULAS
-   classroomNameIsValid : function() { return this.classroomName !== '';}
-   statusIsEnabled : function(){ return this.classroomNameIsValid;}
+   classroomNameIsValid$ : function() { return this.classroomName !== '';}
+   statusIsEnabled$ : function(){ return this.classroomNameIsValid;}
 
    //SUBMODELS
    students : {
