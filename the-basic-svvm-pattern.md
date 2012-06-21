@@ -186,17 +186,18 @@ That will tell the GluJS to do three things at once:
  * add a listener to the view model so when its property changes, the view follows suit.
    * If you call `.set('arriving', true)` on the view model, the button will toggle to match.
 
-To sump up, what the binding pattern provides is an extremely simple way to deal with interactivity : view models (controllers) never have to deal with view controls, just with view models. Since view models are just properties, formulas, and commands (functions) that *you define for your application*, what it takes to spell out your application's custom behavior is clear and minimalistic. An entire layer of complex development overhead (finding and maintaining references to view controls, observing them, and manipulating) is done away with.
+To sum up, what the binding pattern provides is an extremely simple way to deal with interactivity : view models (controllers) never have to deal with view controls, just with view models. Since view models are just properties, formulas, and commands (functions) that *you define for your application*, what it takes to spell out your application's custom behavior is clear and minimalistic. An entire layer of complex development overhead (finding and maintaining references to view controls, observing them, and manipulating) is done away with.
 
 In addition to the simplicity of binding, GluJS also provides a very straightforward way to "compose" your views dynamically that include "config transformations", localization, one-to-many tab patterns, dynamic areas of the screen, pop-up messages and dialogs, layouts, and more. Furthermore, there is a strong "name convention" piece to GluJS we have not yet introduced that makes your bindings even simpler and more consistent. These will be covered in a later more detailed section.
 
 ###Example flow between view model and view
 
 The binding built within GluJS is very simple to use, but lets you quickly compose sophisticated interaction patterns. In the running 'Hello World' example, the flow between view and view model can be summarized as follows:
- 1. The button starts out toggled because `arriving` starts out `true`, and the `title` of the panel starts out as 'Hello World!' because `message` (which is calculated from the value of `arriving`) is that value.
- 3. When clicked, GluJS sets `arriving` to `false`
- 4. That in turn triggers the view model formula called `message` to recalculate based on the provided formula function. It now has the value 'Goodbye World!'
- 5. Since the `title` is bound to `message`, GluJS automatically updates the title to match
+
+ 1. The button starts out toggled (because `arriving` starts out `true`), and the `title` of the panel starts out as 'Hello World!' (because `message` is a formula calculated off of `arriving`).
+ 3. When the button is clicked, `arriving` changes to `false` (because the `pressed` property of the button is bound to the `arriving` view model property).
+ 4. That in turn triggers `message` to recalculate automatically to the value 'Goodbye World!'
+ 5. The title updates to `Goodbye World!) (since the `title` component property is bound to `message`)
 
 It's a simple but very powerful pattern. If you are familiar with ExtJS (and even if you are not) it will be useful to walk through the [For ExtJS users: How does this compare?](for-extjs-users-how-does-this-compare.md#for-extjs-users-how-does-this-compare) section below to see how it compares against "straight-ahead" and "MVC" approaches on even a simple reactive application.
 
@@ -209,7 +210,7 @@ First is the `Viewport` entry-point when you are using GluJS globally within you
 Ext.onReady(function(){glu.viewport('helloworld.main')};);
 ```
 
-That will locate the `main` view model (defined earlier), find the matching view, and then take over the full page to display the application.
+That will locate the `main` view model (defined earlier), find the matching view, and then within ExtJS take over the full page to display the application.
 
 Often within an enterprise you don't have control over the full application and are instead just one module in a bigger framework. To accommodate that within ExtJS, we provide the `glupanel`. Anywhere you can drop a normal ExtJS `panel`, you can drop a `glupanel` and supply what GluJS needs to get started:
 
