@@ -683,9 +683,9 @@ glu.defView ('assets.asset', {
 });
 ```
 
-Plus it's just a whole lot simpler to read.
+Plus it's just a whole lot nicer to read and manage.
 
-We recommend that you lean heavily on your application as it not only makes your code much more concise, it gives you the ability to logically "build your UI" at run-time based on cross-cutting enterprise concerns - like 100% consistent controls, localization, and security.
+We recommend that you lean heavily on your application as it not only makes your code much more concise (and so less expensive to maintain), it gives you the ability to logically "build your UI" at run-time based on cross-cutting enterprise concerns - like 100% consistent controls, localization, and security.
 
 
 *Copyright 2012 Mike Gai. All rights reserved.*
