@@ -159,17 +159,17 @@ To make the view "come alive", we need to connect it with the view model. This i
 
 To understand the purpose of the binding syntax, it is important to take a small step back. ExtJS (among others) provide a rich declarative JSON configuration block for each control. Values provided in the configuration block will only be used on initial render. You must also normally add listeners and invoke setters to add application-specific behavior. In short, there are normally three things you do with any view control:
 
- * To configure for first-time rendering, provide an initial configuration property in the view itself.
+ * To configure for first-time rendering, provide an initial configuration property in the view itself (e.g. the `pressed` property)
 
- * To listen for changes from user input, find a reference to the view object and add event handlers.
-   * For the button example above, we would normally listen on the 'toggle' event.
+ * To listen for changes from user input, find a reference to the view object and add event handlers (e.g. on the `toggle` event).
 
- * To change the view object in response to application behavior, find a reference to the view component and call appropriate methods
-   * To change the pressed state of the button, we would call the `toggle` method, and to change the state of the title we would call `setTitle`.
+ * To change the view object in response to application behavior, find a reference to the view component and call appropriate methods (e.g. `setTitle`).
 
-Note that there is not necessarily any naming consistency between the three operations. The `pressed` configuration becomes the `toggle` event when you want to listen for changes from the user and the `toggle` method when you wish to change the state from your controller handler. Plus, "finding a reference" is bulky to do correctly.
+Confusingly, there is not necessarily any naming consistency (`pressed` versus `toggle()`). Finding references means doing things like creating component queries and declaring `ref` blocks.
 
-GluJS radically simplifies this: Just use the configuration properties and throw out the rest. Then through binding, you get the references and other behavior "for free". To bind a control to a view model property or command is simply to provide a string in the following form:
+GluJS radically simplifies this: Just use the configuration properties and throw out everything else. Then through binding, you get the references and other behavior "for free".
+
+To bind a control to a view model property or command is simply to provide a string in the following form:
 
 ```javascript
 controlConfig : '@{viewmodelProperty}'
