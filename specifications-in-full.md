@@ -249,10 +249,10 @@ An example:
 Given 'the Hello World application on launch', ->
   vm = null
     Meaning -> vm = glu.model 'helloworld.main'
-    ShouldHave 'set the message to "Hello World!"', -> (expect vm.shoutOut).toBe 'Hello World!'
+    ShouldHave 'set the message to "Hello World!"', -> expect(vm.shoutOut).toBe 'Hello World!'
     When 'the user toggles their status', ->
     Meaning -> vm.set 'isLeaving', true
-       ShouldHave 'set the message to "Goodbye World!"', -> (expect vm.shoutOut).toBe 'Goodbye World!'
+       ShouldHave 'set the message to "Goodbye World!"', -> expect(vm.shoutOut).toBe 'Goodbye World!'
 ```
 
 `ShouldHave` blocks assert expectations about the result of the store step - what *should have* happened or what the UI now *should have*. It is an alias on the Jasmine `expect` function, though we prefer to use `ShouldHave` as it keeps writing all of our expectation sentences consistently. The ShouldHave function receives two arguments - the expectation in plain English, and then a function that contains one or more *expectations*, also known as *assertions*.
@@ -269,10 +269,10 @@ For example, let's flesh out the example given above with the actual expectation
   #...Given setup here...
   When 'the user executes the "add to group" command', ->
   Meaning -> vm.addToGroup()
-    ShouldHave 'made a call to the 'add group' backend service', -> (expect backend.getResponsesFor('addGroup').length).toBe(1)
+    ShouldHave 'made a call to the 'add group' backend service', -> expect(backend.getResponsesFor('addGroup').length).toBe(1)
     When 'the back-end returns the 'add group' response successfully', ->
       Meaning -> backend.respondTo 'addGroup'
-      ShouldHave 'made a call to the 'persons' backend service', -> (expect backend.getResponsesFor('persons').length).toBe(1)
+      ShouldHave 'made a call to the 'persons' backend service', -> expect(backend.getResponsesFor('persons').length).toBe(1)
       When 'the back-end returns the people roster', ->
         Meaning -> backend.respondTo 'persons'
 ```

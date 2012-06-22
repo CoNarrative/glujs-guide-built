@@ -63,10 +63,10 @@ Here is that same (first) example given in CoffeeScript:
 Given 'the Hello World application on launch', ->
   vm = null
   Meaning -> vm = glu.model 'helloworld.main'
-  ShouldHave 'set the message to "Hello World!"', -> (expect vm.shoutOut).toBe 'Hello World!'
+  ShouldHave 'set the message to "Hello World!"', -> expect(vm.shoutOut).toBe 'Hello World!'
   When 'the user toggles their status', ->
     Meaning -> vm.set 'isLeaving', true
-    ShouldHave 'set the message to "Goodbye World!"', -> (expect vm.shoutOut).toBe 'Goodbye World!'
+    ShouldHave 'set the message to "Goodbye World!"', -> expect(vm.shoutOut).toBe 'Goodbye World!'
 ```
 
 We use CoffeeScript (for the specifications only) because it makes them so short and expressive that they match up very closely with the plain English specification provided by the analyst. Here's the same thing in javascript if you prefer that:
@@ -77,13 +77,13 @@ Given ('the Hello World application on launch', function() {
         vm = glu.model ('helloworld.main');
     });
     ShouldHave ('set the message to "Hello World!"', function() {
-        expect (vm.shoutOut).toBe ('Hello World!);
+        expect(vm.shoutOut).toBe ('Hello World!);
         When ('the user toggles their status', function() {
             Meaning (function(){
                 vm.set('isLeaving',true);
             });
             ShouldHave ('set the message to "Goodbye World!"', function(){
-                expect (vm.shoutOut).toBe ('Goodbye World!');
+                expect(vm.shoutOut).toBe ('Goodbye World!');
             });
         });
 
